@@ -9,4 +9,4 @@ add_library(
         utils/util.cpp ${PROJECT_SOURCE_DIR}/include/mardcpp/utils/util.h
         ${PROJECT_SOURCE_DIR}/include/mardcpp/collections/Collections.h
         ${PROJECT_SOURCE_DIR}/include/mardcpp/collections/LinkedList.h
-)
+        ../include/mardcpp/utils/ios.h)
