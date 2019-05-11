@@ -1,5 +1,5 @@
 //
-// Created by mard on 4/28/19.
+// Created by mard on 5/11/19.
 //
 
 #ifndef MARDCPP_TIME_H
@@ -9,16 +9,18 @@
 #include <iosfwd>
 #include <string>
 
-#include "mardcpp.h"
+#include <mardcpp/mardcpp.h>
 
 namespace mardcpp::time {
-	using std::chrono::steady_clock;
-	using std::chrono::duration_cast;
-	using std::chrono::seconds;
-	using std::chrono::milliseconds;
-	using std::chrono::microseconds;
-	using std::chrono::nanoseconds;
+
 	using std::chrono::duration;
+	using std::chrono::duration_cast;
+	using std::chrono::microseconds;
+	using std::chrono::milliseconds;
+	using std::chrono::nanoseconds;
+	using std::chrono::seconds;
+	using std::chrono::steady_clock;
+
 	using NanoRatio = std::ratio<1, 1000000000>;
 	using NanoDuration = duration<long, NanoRatio>;
 
@@ -26,17 +28,19 @@ namespace mardcpp::time {
 		using TimeUnit = i64;
 		TimeUnit s, m, u, n;
 
-		Time(): s(0), m(0), u(0), n(0) {}
+		Time() : s(0), m(0), u(0), n(0) {}
+
 		void set(const NanoDuration &duration);
 
-		friend std::ostream &operator<<(std::ostream &os, const Time& time);
+		friend std::ostream &operator<<(std::ostream &os, const Time &time);
 	};
 
 	class Timer {
-		Time& time;
+		Time &time;
 		steady_clock::time_point start;
 	public:
-		explicit Timer(Time& time);
+		explicit Timer(Time &time);
+
 		~Timer();
 	};
 }

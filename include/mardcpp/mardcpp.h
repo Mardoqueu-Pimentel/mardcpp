@@ -1,5 +1,9 @@
-#ifndef MARDCPP_LIBRARY_H
-#define MARDCPP_LIBRARY_H
+//
+// Created by mard on 5/11/19.
+//
+
+#ifndef MARDCPP_MARDCPP_H
+#define MARDCPP_MARDCPP_H
 
 #include <cstdint>
 #include <cmath>
@@ -20,9 +24,9 @@ namespace mardcpp {
 	using f64 = double_t;
 	using f80 = long double;
 
-	using Size = size_t;
+	using Index = size_t;
 
 	void hello();
 }
 
-#endif
+#endif //MARDCPP_MARDCPP_H

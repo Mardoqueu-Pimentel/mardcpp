@@ -8,8 +8,6 @@
 #include <utility>
 #include <cassert>
 
-#include "../mardcpp.h"
-
 namespace mardcpp {
 
 	template<typename T>

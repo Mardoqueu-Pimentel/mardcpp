@@ -1,8 +1,9 @@
 //
-// Created by mard on 4/28/19.
+// Created by mard on 5/11/19.
 //
 
 #include <mardcpp/time.h>
+
 #include <iostream>
 
 namespace mardcpp::time {
@@ -13,7 +14,7 @@ namespace mardcpp::time {
 	}
 
 	Timer::Timer(Time &time)
-	:	time(time), start(steady_clock::now()) {}
+			:	time(time), start(steady_clock::now()) {}
 
 	void Time::set(const mardcpp::time::NanoDuration &duration) {
 		s = duration_cast<seconds>(duration).count();
