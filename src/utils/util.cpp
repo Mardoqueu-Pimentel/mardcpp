@@ -4,6 +4,8 @@
 
 #include <mardcpp/utils/util.h>
 
+#include <iostream>
+
 namespace mardcpp {
 
 	const pair <Args, Kwargs> parseArgv(int argc, const char *argv[]) {
@@ -23,3 +25,4 @@ namespace mardcpp {
 	}
 
 }
+

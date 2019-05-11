@@ -5,11 +5,13 @@
 #ifndef MARDCPP_UTIL_H
 #define MARDCPP_UTIL_H
 
+#include <iosfwd>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
 #include <mardcpp/mardcpp.h>
+
 
 namespace mardcpp {
 
@@ -25,5 +27,7 @@ namespace mardcpp {
 
 	const pair<Args, Kwargs> parseArgv(int argc, const char *argv[]);
 }
+
+
 
 #endif //MARDCPP_UTIL_H
