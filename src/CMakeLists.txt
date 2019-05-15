@@ -10,3 +10,5 @@ add_library(
         ${PROJECT_SOURCE_DIR}/include/mardcpp/collections/Collections.h
         ${PROJECT_SOURCE_DIR}/include/mardcpp/collections/LinkedList.h
         ../include/mardcpp/utils/ios.h)
+
+add_executable(test test.cpp)
