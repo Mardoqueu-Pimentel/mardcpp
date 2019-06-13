@@ -26,9 +26,9 @@ namespace mardcpp::time {
 
 	struct Time {
 		using TimeUnit = i64;
-		TimeUnit s, m, u, n;
+		TimeUnit s, m, u, n, raw;
 
-		Time() : s(0), m(0), u(0), n(0) {}
+		Time() : s(0), m(0), u(0), n(0), raw(0) {}
 
 		void set(const NanoDuration &duration);
 

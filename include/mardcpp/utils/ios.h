@@ -9,6 +9,8 @@
 #include <iomanip>
 #include <unordered_map>
 #include <vector>
+#include <deque>
+#include "util.h"
 
 namespace mardcpp {
 
@@ -20,10 +22,10 @@ namespace mardcpp {
 		unsigned paddingNumber;
 
 		OutputStream(std::ostream &os)
-				: os(os), padding(' '), paddingNumber(0) {}
+			: os(os), padding(' '), paddingNumber(0) {}
 
-		template <typename T>
-		inline OutputStream &operator<<(const T& e) {
+		template<typename T>
+		inline OutputStream &operator<<(const T &e) {
 			if (paddingNumber) {
 				os << std::setw(paddingNumber) << std::setfill(padding);
 			}
@@ -41,19 +43,8 @@ namespace mardcpp {
 			return *this;
 		}
 
-		template <typename T>
-		inline OutputStream &operator<<(const std::vector<T>& arr) {
-			size_t i;
-			for (i = 0; i < arr.size() - 1; ++i) {
-				*this << arr[i];
-				os << ' ';
-			}
-			*this << arr[i];
-			return *this;
-		}
-
 		template<typename T1, typename T2>
-		inline OutputStream &operator<<(const std::unordered_map<T1, T2>& map) {
+		inline OutputStream &operator<<(const std::unordered_map<T1, T2> &map) {
 			auto it = map.begin();
 			if (it != map.end()) {
 				auto prevIt = it;
@@ -77,7 +68,7 @@ namespace mardcpp {
 			return *this;
 		}
 
-		template <typename T, size_t N>
+		template<typename T, size_t N>
 		inline OutputStream &operator<<(const T (&arr)[N]) {
 			for (size_t i = 0; i < N; ++i) {
 				*this << arr[i];
@@ -88,13 +79,53 @@ namespace mardcpp {
 			return *this;
 		}
 
-		template <size_t N>
+		template<typename T, template<typename, typename> class Cont>
+		inline OutputStream &operator<<(const Cont<T, std::allocator<T>> &cont) {
+			auto it = cont.begin();
+			if (it != cont.end()) {
+				auto nextIt = it;
+				++nextIt;
+				while (nextIt != cont.end()) {
+					*this << *it;
+					os << ' ';
+					it = nextIt;
+					++nextIt;
+				}
+				*this << *it;
+			}
+			return *this;
+		}
+
+		template<
+			typename T,
+			template<typename, typename> class ContA,
+			template<typename, typename> class ContB
+		>
+		inline OutputStream &operator<<(
+			const ContA<ContB<T, std::allocator<T>>, std::allocator<ContB<T, std::allocator<T>>>> &cont
+		) {
+			auto it = cont.begin();
+			if (it != cont.end()) {
+				auto nextIt = it;
+				++nextIt;
+				while (nextIt != cont.end()) {
+					*this << *it;
+					os << '\n';
+					it = nextIt;
+					++nextIt;
+				}
+				*this << *it;
+			}
+			return *this;
+		}
+
+		template<size_t N>
 		inline OutputStream &operator<<(const char (&arr)[N]) {
 			os << arr;
 			return *this;
 		}
 
-		template <typename T, size_t N, size_t M>
+		template<typename T, size_t N, size_t M>
 		inline OutputStream &operator<<(const T (&arr)[N][M]) {
 			for (int i = 0; i < N; ++i) {
 				*this << arr[i];
@@ -110,27 +141,29 @@ namespace mardcpp {
 		std::istream &is;
 	public:
 		InputStream(std::istream &is)
-				: is(is) {}
+			: is(is) {}
 
-		template <typename T>
+		template<typename T>
 		inline InputStream &operator>>(T &e) {
 			is >> e;
 			return *this;
 		}
 
 		inline InputStream &operator>>(unsigned char &e) {
-			unsigned short dummy; is >> dummy;
+			unsigned short dummy;
+			is >> dummy;
 			e = (unsigned char) dummy;
 			return *this;
 		}
 
 		inline InputStream &operator>>(signed char &e) {
-			signed short dummy; is >> dummy;
+			signed short dummy;
+			is >> dummy;
 			e = (signed char) dummy;
 			return *this;
 		}
 
-		template <typename T, size_t N>
+		template<typename T, size_t N>
 		inline InputStream &operator>>(T (&arr)[N]) {
 			for (auto &e : arr) { *this >> e; }
 			return *this;

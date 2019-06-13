@@ -15,6 +15,12 @@
 
 namespace mardcpp {
 
+	template<typename T1, typename T2>
+	struct notSame : public std::true_type {};
+
+	template<typename T1>
+	struct notSame<T1, T1> : public std::false_type {};
+
 	using std::pair;
 	using std::string;
 	using std::unordered_map;
@@ -27,7 +33,6 @@ namespace mardcpp {
 
 	const pair<Args, Kwargs> parseArgv(int argc, const char *argv[]);
 }
-
 
 
 #endif //MARDCPP_UTIL_H

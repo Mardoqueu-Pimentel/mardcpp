@@ -30,6 +30,8 @@ namespace mardcpp::time {
 		n -= s * 1000000000;
 		n -= m * 1000000;
 		n -= u * 1000;
+
+		raw = duration_cast<nanoseconds>(duration).count();
 	}
 
 	std::ostream &operator<<(std::ostream &os, const Time &time) {
