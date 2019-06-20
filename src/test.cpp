@@ -2,22 +2,6 @@
 // Created by mard on 5/12/19.
 //
 
-
-
-#include <effolkronium/random.hpp>
-#include <mardcpp/stream/InputStream>
-#include <mardcpp/stream/OutputStream>
-#include <mardcpp/mardcpp>
-#include <mardcpp/utils/Kwargs>
-#include <mardcpp/utils/time.h>
-#include <mardcpp/std/Vector>
-#include <mardcpp/std/Map>
-
-using Rand = effolkronium::random_static;
-
-mardcpp::InputStream cin(std::cin);
-mardcpp::OutputStream cout(std::cout);
-
 /*
 
 using mardcpp::u32;
@@ -44,8 +28,6 @@ Mat matMul(const Mat &m1, const Mat &m2) {
 }*/
 
 int main(int argc, char const *argv[]) {
-
-
 
 /*	mardcpp::Arguments arguments(argc, argv);
 	cout << arguments << '\n';
