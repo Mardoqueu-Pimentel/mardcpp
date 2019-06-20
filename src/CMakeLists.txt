@@ -28,10 +28,14 @@ set(SOURCES
 	${SOURCES_PATH}/stream/OutputStream.cpp	
 )
 
+set(INC_PATH ${PROJECT_SOURCE_DIR}/include)
+set(LIB_RANDOM_INC ${PROJECT_SOURCE_DIR}/lib/random/include)
+
 add_library(${PROJECT_NAME} ${HEADERS} ${SOURCES})
-target_include_directories(${PROJECT_NAME} 
-	PUBLIC 
-		${PROJECT_SOURCE_DIR}/include
+target_include_directories(${PROJECT_NAME}
+	PUBLIC
+		${INC_PATH}
+		${LIB_RANDOM_INC}
 )
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
