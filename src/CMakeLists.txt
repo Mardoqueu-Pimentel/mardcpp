@@ -28,13 +28,10 @@ set(SOURCES
 	${SOURCES_PATH}/stream/OutputStream.cpp	
 )
 
-set(LIB_PATH ${PROJECT_SOURCE_DIR}/include)
-
 add_library(${PROJECT_NAME} ${HEADERS} ${SOURCES})
 target_include_directories(${PROJECT_NAME} 
 	PUBLIC 
 		${PROJECT_SOURCE_DIR}/include
-		${LIB_PATH}
 )
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
