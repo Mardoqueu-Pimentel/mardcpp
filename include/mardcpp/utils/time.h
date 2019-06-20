@@ -2,14 +2,13 @@
 // Created by mard on 5/11/19.
 //
 
-#ifndef MARDCPP_TIME_H
-#define MARDCPP_TIME_H
+#pragma once
 
 #include <chrono>
 #include <iosfwd>
 #include <string>
 
-#include <mardcpp/mardcpp.h>
+#include <mardcpp/mardcpp>
 
 namespace mardcpp::time {
 
@@ -44,5 +43,3 @@ namespace mardcpp::time {
 		~Timer();
 	};
 }
-
-#endif //MARDCPP_TIME_H

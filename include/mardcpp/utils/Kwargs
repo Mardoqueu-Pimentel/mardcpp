@@ -1,0 +1,45 @@
+//
+// Created by mard on 6/15/19.
+//
+
+#pragma once
+
+#include <mardcpp/std/Pair>
+#include <mardcpp/std/String>
+#include <mardcpp/std/UnorderedMap>
+#include <mardcpp/std/UnorderedSet>
+#include <mardcpp/utils/util.h>
+
+#include <mardcpp/stream/OutputStream>
+
+namespace mardcpp {
+
+	class Arguments {
+	public:
+		using Arg = String;
+		using Args = UnorderedSet<Arg>;
+		using Kwarg = Pair<Arg, String>;
+		using Kwargs = UnorderedMap<Kwarg::first_type, Kwarg::second_type>;
+
+	private:
+		Args mArgs;
+		Kwargs mKwargs;
+
+	public:
+		Arguments(int argc, const char **argv);
+
+		template <typename T>
+		const T getOrDefault(const Arg& arg, const T& defaultValue) const {
+			auto it = mKwargs.find(arg);
+			if (it != mKwargs.end()) {
+				return toType<T>(it->second);
+			}
+			return defaultValue;
+		}
+
+		bool has(const Arg& arg) const;
+
+		friend OutputStream& operator<<(mardcpp::OutputStream &os, const mardcpp::Arguments &arguments);
+	};
+
+}

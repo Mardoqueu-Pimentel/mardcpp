@@ -2,8 +2,8 @@
 // Created by mard on 5/11/19.
 //
 
-#ifndef MARDCPP_MARDCPP_H
-#define MARDCPP_MARDCPP_H
+#ifndef MARDCPP_MARDCPP_
+#define MARDCPP_MARDCPP_
 
 #include <cstdint>
 #include <cmath>
@@ -25,8 +25,6 @@ namespace mardcpp {
 	using f80 = long double;
 
 	using Index = size_t;
-
-	void hello();
 }
 
-#endif //MARDCPP_MARDCPP_H
+#endif //MARDCPP_MARDCPP_

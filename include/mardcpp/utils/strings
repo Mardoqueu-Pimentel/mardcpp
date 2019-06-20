@@ -1,0 +1,14 @@
+//
+// Created by mard on 6/15/19.
+//
+
+#pragma once
+
+#include <mardcpp/std/String>
+
+namespace mardcpp {
+
+	void toLower(String &string);
+
+	void toUpper(String &string);
+}

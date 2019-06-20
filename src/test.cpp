@@ -2,102 +2,79 @@
 // Created by mard on 5/12/19.
 //
 
-#include <algorithm>
-#include <iostream>
-#include <fstream>
-#include <random>
-#include <vector>
-#include <queue>
-
-#include <mardcpp/utils/ios.h>
 
 
+#include <effolkronium/random.hpp>
+#include <mardcpp/stream/InputStream>
+#include <mardcpp/stream/OutputStream>
+#include <mardcpp/mardcpp>
+#include <mardcpp/utils/Kwargs>
+#include <mardcpp/utils/time.h>
+#include <mardcpp/std/Vector>
+#include <mardcpp/std/Map>
 
-int main() {
-	mardcpp::OutputStream cout(std::cout);
+using Rand = effolkronium::random_static;
 
-	std::default_random_engine gen(42);
+mardcpp::InputStream cin(std::cin);
+mardcpp::OutputStream cout(std::cout);
 
-	int V = 10;
-	float conectivity = 0.5;
+/*
 
-	std::vector<std::vector<int>> vertexes(V, std::vector<int>(V, -1));
+using mardcpp::u32;
 
-	std::uniform_int_distribution<int> costDist(1, 20);
-	std::uniform_int_distribution<int> conDist(1, 100);
-	auto costr = [&](){ return costDist(gen); };
-	auto con = [&](){ return conDist(gen); };
+using Row = std::vector<int>;
+using Mat = std::vector<Row>;
 
-	for (int i = 0; i < V; ++i) {
-		for (int j = 0; j < V; ++j) {
-			if (i == j or con() <= (conectivity * 100)) {
-				vertexes[i][j] = costr();
+Mat matMul(const Mat &m1, const Mat &m2) {
+	Mat result(m1.size(), Row(m2[0].size(), 0));
+
+	#pragma omp parallel for
+	for (int i = 0; i < result.size(); ++i) {
+		for (int j = 0; j < result[0].size(); ++j) {
+			int sum = 0;
+			#pragma omp simd
+			for (int k = 0; k < m2.size(); ++k) {
+				sum += m1[i][k] * m2[k][j];
 			}
+			result[i][j] = sum;
 		}
 	}
 
+	return result;
+}*/
 
-	using Node = std::pair<int,int>;
+int main(int argc, char const *argv[]) {
 
-	std::vector<Node> G[V];
-	for (int i = 0; i < V; ++i) {
-		for (int j = 0; j < V; ++j) {
-			if (vertexes[i][j] >= 1) {
-				G[i].emplace_back(vertexes[i][j], j);
-			}
+
+
+/*	mardcpp::Arguments arguments(argc, argv);
+	cout << arguments << '\n';
+	auto N = arguments.getOrDefault("N", 2);
+	int mal = N, mac = N, mbc = N;
+
+	Mat ma(mal, Row(mac, 0)), mb(mac, Row(mbc, 0));
+	for (int i = 0; i < ma.size(); ++i) {
+		for (int j = 0; j < ma[0].size(); ++j) {
+			ma[i][j] = Rand::get(0, 9);
+		}
+	}
+	for (int i = 0; i < mb.size(); ++i) {
+		for (int j = 0; j < mb[0].size(); ++j) {
+			mb[i][j] = Rand::get(0, 9);
 		}
 	}
 
-	using Container = std::vector<Node>;
-	using PriorityQueue = std::priority_queue<Node, Container, std::greater<>>;
+	cout << ma << "\n\n";
+	cout << mb << "\n\n";
 
-	Container container; container.reserve(V*V);
-	PriorityQueue queue(std::greater<>(), std::move(container));
-
-	std::vector<char> open(V, true);
-	open[0] = false;
-	for (const auto&[cost, out]: G[0]) {
-		if (open[out]) {
-			queue.emplace(cost, out);
-		}
+	Mat result;
+	mardcpp::time::Time time;
+	{
+		mardcpp::time::Timer timer(time);
+		result = matMul(ma, mb);
 	}
 
-
-
-
-	for (int i = 0, j = 0; i < V; ++i) {
-		for (j = 0; j < V - 1; ++j) {
-			cout << std::setw(4) << vertexes[i][j] << ' ';
-		}
-		cout << std::setw(4) << vertexes[i][j] << '\n';
-	}
-
-	std::ofstream g("graph.gv");
-	mardcpp::OutputStream osg(g);
-
-	osg << "digraph {\n";
-
-	if (g.is_open()) {
-
-		while (not queue.empty()) {
-			const auto&[_, curr] = queue.top(); queue.pop();
-
-			for (const auto&[cost, out] : G[curr]) {
-				if (open[out]) {
-
-					osg << '\t' << (char)('a' + curr) << " -> " << (char)('a' + out) << ";\n";
-
-					open[out] = false;
-					queue.emplace(cost, out);
-				}
-			}
-		}
-
-
-	}
-
-	osg << "}\n";
-
+	cout << "Time: " << time << "\n\n";*/
 
 	return 0;
 }
