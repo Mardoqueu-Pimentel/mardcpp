@@ -11,7 +11,7 @@ set(HEADERS
 	${HEADERS_PATH}/mardcpp
 	${HEADERS_PATH}/utils/time.h
 	${HEADERS_PATH}/utils/util.h
-	${HEADERS_PATH}/utils/Kwargs
+	${HEADERS_PATH}/utils/Arguments
 	${HEADERS_PATH}/utils/strings	
 	${HEADERS_PATH}/stream/InputStream
 	${HEADERS_PATH}/stream/OutputStream
@@ -22,7 +22,7 @@ set(SOURCES
 	${SOURCES_PATH}/mardcpp.cpp
 	${SOURCES_PATH}/time.cpp
 	${SOURCES_PATH}/utils/util.cpp
-	${SOURCES_PATH}/utils/Kwargs.cpp	
+	${SOURCES_PATH}/utils/Arguments.cpp
 	${SOURCES_PATH}/utils/strings.cpp
 	${SOURCES_PATH}/stream/InputStream.cpp
 	${SOURCES_PATH}/stream/OutputStream.cpp	

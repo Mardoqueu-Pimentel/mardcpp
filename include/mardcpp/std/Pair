@@ -14,7 +14,7 @@ namespace mardcpp {
 
 	template<typename F, typename S>
 	OutputStream &operator<<(OutputStream &os, const Pair<F,S> &pair) {
-		os << pair.first << ',' << pair.second;
+		os << pair.first << '=' << pair.second;
 		return os;
 	}
 }
