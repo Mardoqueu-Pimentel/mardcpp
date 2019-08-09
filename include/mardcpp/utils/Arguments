@@ -48,7 +48,9 @@ namespace mardcpp {
 				return toType<T>(it->second);
 			}
 
-			throw std::invalid_argument("Argument not found!");
+			static char err[1024];
+			snprintf(err, 1024, "Argument \'%s\' not found!", arg.c_str());
+			throw std::invalid_argument(err);
 		}
 
 		bool has(const Arg& arg) const noexcept;
