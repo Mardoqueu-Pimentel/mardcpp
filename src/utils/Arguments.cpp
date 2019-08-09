@@ -36,7 +36,7 @@ namespace mardcpp {
 		if (std::regex_search(string, results, std::regex("^([^= ]+)=([^= ]+)$"))) {
 			mKwargs.emplace(results[1], results[2]);
 		} else {
-			mArgs.emplace(std::move(string));
+			mArgs.emplace(string);
 		}
 	}
 
