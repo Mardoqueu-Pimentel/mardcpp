@@ -2,8 +2,7 @@
 // Created by mard on 4/28/19.
 //
 
-#ifndef MARDCPP_LINKEDLIST_H
-#define MARDCPP_LINKEDLIST_H
+#pragma once
 
 #include <utility>
 #include <cassert>
@@ -100,4 +99,3 @@ namespace mardcpp {
 	};
 }
 
-#endif //MARDCPP_LINKEDLIST_H

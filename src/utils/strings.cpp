@@ -2,7 +2,7 @@
 // Created by mard on 6/15/19.
 //
 
-#include <mardcpp/utils/strings>
+#include <mardcpp/utils/strings.hpp>
 #include <algorithm>
 
 void mardcpp::toLower(mardcpp::String &string) {

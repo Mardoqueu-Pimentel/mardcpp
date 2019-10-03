@@ -2,16 +2,23 @@
 // Created by mard on 5/11/19.
 //
 
-#ifndef MARDCPP_UTIL_H
-#define MARDCPP_UTIL_H
+#pragma once
 
 #include <stdexcept>
 #include <sstream>
 
-#include <mardcpp/mardcpp>
-#include <mardcpp/std/String>
+#include <mardcpp/mardcpp.hpp>
+#include <mardcpp/std/String.hpp>
+#include <array>
+#include <mardcpp/mardcpp.hpp>
 
 namespace mardcpp {
+
+	template<size_t size = 4_KB>
+	std::array<char, size> &getSharedBuffer() {
+		static std::array<char, size> buffer;
+		return buffer;
+	}
 
 	template<typename T1, typename T2>
 	struct notSame : public std::true_type {};
@@ -46,6 +53,10 @@ namespace mardcpp {
 		return it->second;
 	}
 
-}
+	template<size_t size = 4_KB>
+	const char * __attribute__ ((__format__ (__printf__, 1, 2)))
+	format (const char *__restrict format, ...) noexcept;
 
-#endif //MARDCPP_UTIL_H
+	std::string __attribute__ ((__format__ (__printf__, 1, 2)))
+	format(const char *__restrict format, ...) noexcept;
+}

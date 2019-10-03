@@ -1,20 +1,20 @@
 set(HEADERS_PATH ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME})
 set(HEADERS
-	${HEADERS_PATH}/collections/Collections.h
-	${HEADERS_PATH}/collections/LinkedList.h
-	${HEADERS_PATH}/std/Pair
-	${HEADERS_PATH}/std/String
-	${HEADERS_PATH}/std/Map
-	${HEADERS_PATH}/std/UnorderedMap
-	${HEADERS_PATH}/std/Vector
-	${HEADERS_PATH}/std/UnorderedSet
-	${HEADERS_PATH}/mardcpp
-	${HEADERS_PATH}/utils/time.h
-	${HEADERS_PATH}/utils/util.h
-	${HEADERS_PATH}/utils/Arguments
-	${HEADERS_PATH}/utils/strings	
-	${HEADERS_PATH}/stream/InputStream
-	${HEADERS_PATH}/stream/OutputStream
+	${HEADERS_PATH}/collections/Collections.hpp
+	${HEADERS_PATH}/collections/LinkedList.hpp
+	${HEADERS_PATH}/std/Pair.hpp
+	${HEADERS_PATH}/std/String.hpp
+	${HEADERS_PATH}/std/Map.hpp
+	${HEADERS_PATH}/std/UnorderedMap.hpp
+	${HEADERS_PATH}/std/Vector.hpp
+	${HEADERS_PATH}/std/UnorderedSet.hpp
+	${HEADERS_PATH}/mardcpp.hpp
+	${HEADERS_PATH}/utils/time.hpp
+	${HEADERS_PATH}/utils/util.hpp
+	${HEADERS_PATH}/utils/Arguments.hpp
+	${HEADERS_PATH}/utils/strings.hpp
+	${HEADERS_PATH}/stream/InputStream.hpp
+	${HEADERS_PATH}/stream/OutputStream.hpp
 )
 
 set(SOURCES_PATH ${PROJECT_SOURCE_DIR}/src)
@@ -38,7 +38,25 @@ target_include_directories(${PROJECT_NAME}
 		${LIB_RANDOM_INC}
 )
 
+set(TEST_HEADERS
+	${HEADERS_PATH}/test.hpp
+)
+
+set(TEST_SOURCES
+	${SOURCES_PATH}/test.cpp
+)
+
+add_executable(${PROJECT_NAME}Test ${TEST_HEADERS} ${TEST_SOURCES})
+target_include_directories(${PROJECT_NAME}Test
+	PRIVATE
+		${INC_PATH}
+		${LIB_RANDOM_INC}
+)
+
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME}Test PROPERTY CXX_STANDARD 17)
+
+target_link_libraries(${PROJECT_NAME}Test ${PROJECT_NAME})
 
 #set(tool_dest "bin")
 #set(include_dest "include/${PROJECT_NAME}-${PROJECT_VERSION}")

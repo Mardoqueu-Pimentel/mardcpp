@@ -6,7 +6,7 @@
 
 #include <unordered_set>
 
-#include <mardcpp/stream/OutputStream>
+#include <mardcpp/stream/OutputStream.hpp>
 
 namespace mardcpp {
 

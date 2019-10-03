@@ -8,7 +8,7 @@
 #include <iosfwd>
 #include <string>
 
-#include <mardcpp/mardcpp>
+#include <mardcpp/mardcpp.hpp>
 
 namespace mardcpp::time {
 

@@ -6,7 +6,7 @@
 
 #include <unordered_map>
 
-#include <mardcpp/stream/OutputStream>
+#include <mardcpp/stream/OutputStream.hpp>
 
 namespace mardcpp {
 

@@ -2,7 +2,7 @@
 // Created by mard on 5/11/19.
 //
 
-#include <mardcpp/utils/time.h>
+#include <mardcpp/utils/time.hpp>
 
 #include <iostream>
 

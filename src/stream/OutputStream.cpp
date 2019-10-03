@@ -2,7 +2,7 @@
 // Created by mard on 6/15/19.
 //
 
-#include <mardcpp/stream/OutputStream>
+#include <mardcpp/stream/OutputStream.hpp>
 
 namespace mardcpp {
 

@@ -6,7 +6,7 @@
 
 #include <vector>
 
-#include <mardcpp/stream/OutputStream>
+#include <mardcpp/stream/OutputStream.hpp>
 
 namespace mardcpp {
 

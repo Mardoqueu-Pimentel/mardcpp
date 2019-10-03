@@ -4,12 +4,14 @@
 
 #include <regex>
 
-#include <mardcpp/utils/Arguments>
+#include <mardcpp/utils/Arguments.hpp>
+#include <boost/algorithm/string.hpp>
 
 namespace mardcpp {
+	namespace balg = boost::algorithm;
 
 	Arguments::Arguments(int argc, const char **argv) noexcept {
-		for (int i = 0; i < argc; ++i) {
+		for (size_t i = 0; i < static_cast<size_t>(argc); ++i) {
 			parse(argv[i]);
 		}
 	}

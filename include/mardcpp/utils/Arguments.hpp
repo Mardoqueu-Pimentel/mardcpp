@@ -4,13 +4,13 @@
 
 #pragma once
 
-#include <mardcpp/std/Pair>
-#include <mardcpp/std/String>
-#include <mardcpp/std/UnorderedMap>
-#include <mardcpp/std/UnorderedSet>
-#include <mardcpp/utils/util.h>
+#include <mardcpp/std/Pair.hpp>
+#include <mardcpp/std/String.hpp>
+#include <mardcpp/std/UnorderedMap.hpp>
+#include <mardcpp/std/UnorderedSet.hpp>
+#include <mardcpp/utils/util.hpp>
 
-#include <mardcpp/stream/OutputStream>
+#include <mardcpp/stream/OutputStream.hpp>
 
 namespace mardcpp {
 
