@@ -17,9 +17,9 @@ namespace mardcpp {
 
 	public:
 		char padding;
-		unsigned paddingNumber;
+		int paddingNumber;
 
-		OutputStream(std::ostream &os);
+		explicit OutputStream(std::ostream &os);
 
 		template<typename T>
 		inline OutputStream &operator<<(const T &e) {
@@ -76,4 +76,6 @@ namespace mardcpp {
 			}
 		}
 	};
+
+	static inline auto os = OutputStream(std::cout);
 }

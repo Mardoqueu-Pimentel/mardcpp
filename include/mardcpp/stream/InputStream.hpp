@@ -11,7 +11,7 @@ namespace mardcpp {
 	class InputStream {
 		std::istream &is;
 	public:
-		InputStream(std::istream &is);
+		explicit InputStream(std::istream &is);
 
 		template<typename T>
 		inline InputStream &operator>>(T &e) {
@@ -30,4 +30,5 @@ namespace mardcpp {
 		}
 	};
 
+	static inline auto is = InputStream(std::cin);
 }
