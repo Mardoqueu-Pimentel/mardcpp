@@ -9,6 +9,7 @@ int mardcpp::application(const mardcpp::Arguments &arguments) {
 
 	mardcpp::os << arguments << '\n';
 
+	mardcpp::os << arguments.get(0) << '\n';
 
 	return 0;
 }

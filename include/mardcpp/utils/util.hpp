@@ -53,10 +53,9 @@ namespace mardcpp {
 		return it->second;
 	}
 
-	template<size_t size = 4_KB>
 	const char * __attribute__ ((__format__ (__printf__, 1, 2)))
-	format (const char *__restrict format, ...) noexcept;
+	fmt (const char *__restrict format, ...) noexcept;
 
 	std::string __attribute__ ((__format__ (__printf__, 1, 2)))
-	format(const char *__restrict format, ...) noexcept;
+	sfmt(const char *__restrict format, ...) noexcept;
 }

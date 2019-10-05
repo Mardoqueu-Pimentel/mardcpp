@@ -9,8 +9,7 @@
 
 namespace mardcpp {
 
-	template<size_t size>
-	const char * format(const char *__restrict format, ...) noexcept {
+	const char * fmt(const char *__restrict format, ...) noexcept {
 		va_list args;
 		va_start(args, format);
 		vsnprintf(getSharedBuffer().data(), getSharedBuffer().size(), format, args);
@@ -18,7 +17,7 @@ namespace mardcpp {
 		return getSharedBuffer().data();
 	}
 
-	std::string format(const char *__restrict format, ...) noexcept {
+	std::string sfmt(const char *__restrict format, ...) noexcept {
 		va_list args;
 		va_start(args, format);
 		std::string result;

@@ -40,7 +40,7 @@ namespace mardcpp {
 		return os;
 	}
 
-	void Arguments::parse(const String &string) {
+	void Arguments::parse(const String &string) noexcept {
 		std::smatch results;
 		if (std::regex_search(string, results, std::regex("^([^= ]+)=([^= ]+)$"))) {
 			mKwargs.emplace(results[1], results[2]);
@@ -49,7 +49,7 @@ namespace mardcpp {
 		}
 	}
 
-	void Arguments::parseCommands(size_t i, const String &string) {
+	void Arguments::parseCommands(size_t i, const String &string) noexcept {
 		if (mNextIsValue) {
 			mNextIsValue = false;
 			if (string[0] != '-' or string[1] != '-') {

@@ -29,9 +29,9 @@ namespace mardcpp {
 		bool mNextIsValue;
 		std::string mNextKey;
 
-		void parseCommands(size_t i, const String &string);
+		void parseCommands(size_t i, const String &string) noexcept;
 
-		void parse(const String &string);
+		void parse(const String &string) noexcept;
 
 	public:
 		Arguments(int argc, const char **argv) noexcept;
@@ -47,21 +47,21 @@ namespace mardcpp {
 			return defaultValue;
 		}
 
-		template <typename T>
+		template <typename T = String>
 		T get(const Arg& arg) const {
 			auto it = mKwargs.find(arg);
 			if (it != mKwargs.end()) {
 				return toType<T>(it->second);
 			}
-			throw std::invalid_argument(format<>("Argument \'%s\' not found.", arg.c_str()));
+			throw std::invalid_argument(fmt("Argument \'%s\' not found.", arg.c_str()));
 		}
 
-		template<typename T>
-		T get(size_t i) {
+		template<typename T = String>
+		T get(size_t i) const {
 			if (i < mArgs.size()) {
 				return toType<T>(mArgs[i]);
 			}
-			throw std::invalid_argument(format<>("Argument %d not found.", i));
+			throw std::invalid_argument(fmt("Argument %zu not found.", i));
 		}
 
 		bool has(const Arg& arg) const noexcept;
@@ -73,6 +73,11 @@ namespace mardcpp {
 		inline const Kwargs& getKwargs() const noexcept;
 
 		friend OutputStream& operator<<(mardcpp::OutputStream &os, const mardcpp::Arguments &arguments);
+
+		template<typename T>
+		inline T operator[](size_t i) const {
+			return get<T>(i);
+		}
 	};
 
 }
