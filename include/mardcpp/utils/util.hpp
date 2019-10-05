@@ -55,6 +55,23 @@ namespace mc {
 		return it->second;
 	}
 
+	template<typename T>
+	struct RefHasher {
+		using RefType = std::reference_wrapper<T>;
+		static constexpr auto hash = std::hash<typename std::remove_const<T>::type>();
+		size_t operator()(const RefType &ref) const {
+			return hash(ref.get());
+		}
+	};
+
+	template<typename T>
+	struct RefEq {
+		using RefType = std::reference_wrapper<T>;
+		bool operator()(const RefType &x, const RefType &y) const {
+			return x.get() == y.get();
+		}
+	};
+
 	const char * __attribute__ ((__format__ (__printf__, 1, 2)))
 	fmt (const char *__restrict format, ...) noexcept;
 

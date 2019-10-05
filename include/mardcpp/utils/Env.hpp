@@ -5,7 +5,10 @@
 #pragma once
 
 #include <mardcpp/mardcpp.hpp>
+#include <mardcpp/utils/util.hpp>
 #include <iosfwd>
+#include <functional>
+
 
 namespace mc {
 
@@ -51,13 +54,19 @@ namespace mc {
 		}
 
 		friend std::istream& operator>>(std::istream &is, Env &env) {
-			static const UnorderedMap<String, Env> ENV_TO_STRING = {
+			using KT = const String;
+			using K = std::reference_wrapper<KT>;
+			using V = Env;
+			using H = RefHasher<KT>;
+			using C = RefEq<KT>;
+
+			std::unordered_map<K, V, H, C> ENV_TO_STRING = {
 				{ Env::STR_DEVELOPMENT, Env(Env::Value::DEVELOPMENT) },
 				{ Env::STR_STAGE, Env(Env::Value::STAGE)},
 				{ Env::STR_PRODUCTION, Env(Env::Value::PRODUCTION) }
 			};
 
-			String word; is >> word;
+			String word = env; is >> word;
 
 			auto it = ENV_TO_STRING.find(word);
 			if (it != ENV_TO_STRING.end()) {
