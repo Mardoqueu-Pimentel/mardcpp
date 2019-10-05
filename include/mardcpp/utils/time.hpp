@@ -10,7 +10,7 @@
 
 #include <mardcpp/mardcpp.hpp>
 
-namespace mardcpp::time {
+namespace mc::time {
 
 	using std::chrono::duration;
 	using std::chrono::duration_cast;

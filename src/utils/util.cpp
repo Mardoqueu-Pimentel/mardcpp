@@ -7,14 +7,14 @@
 #include <cstdarg>
 #include <iostream>
 
-namespace mardcpp {
+namespace mc {
 
 	const char * fmt(const char *__restrict format, ...) noexcept {
 		va_list args;
 		va_start(args, format);
-		vsnprintf(getSharedBuffer().data(), getSharedBuffer().size(), format, args);
+		vsnprintf(gb::getSharedBuffer().data(), gb::getSharedBuffer().size(), format, args);
 		va_end(args);
-		return getSharedBuffer().data();
+		return gb::getSharedBuffer().data();
 	}
 
 	std::string sfmt(const char *__restrict format, ...) noexcept {

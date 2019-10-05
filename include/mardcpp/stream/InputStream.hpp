@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-namespace mardcpp {
+namespace mc {
 
 	class InputStream {
 		std::istream &is;

@@ -12,12 +12,14 @@
 #include <array>
 #include <mardcpp/mardcpp.hpp>
 
-namespace mardcpp {
+namespace mc {
 
-	template<size_t size = 4_KB>
-	std::array<char, size> &getSharedBuffer() {
-		static std::array<char, size> buffer;
-		return buffer;
+	namespace gb {
+		template<size_t size = 4_KB>
+		std::array<char, size> &getSharedBuffer() {
+			static std::array<char, size> buffer;
+			return buffer;
+		}
 	}
 
 	template<typename T1, typename T2>

@@ -15,6 +15,7 @@ set(HEADERS
 	${HEADERS_PATH}/utils/strings.hpp
 	${HEADERS_PATH}/stream/InputStream.hpp
 	${HEADERS_PATH}/stream/OutputStream.hpp
+	${HEADERS_PATH}/utils/Env.hpp
 )
 
 set(SOURCES_PATH ${PROJECT_SOURCE_DIR}/src)

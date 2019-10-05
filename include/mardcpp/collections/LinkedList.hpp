@@ -7,7 +7,7 @@
 #include <utility>
 #include <cassert>
 
-namespace mardcpp {
+namespace mc {
 
 	template<typename T>
 	class LinkedList {

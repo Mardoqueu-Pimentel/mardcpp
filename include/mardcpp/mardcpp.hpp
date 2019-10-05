@@ -7,7 +7,7 @@
 #include <cstdint>
 #include <cmath>
 
-namespace mardcpp {
+namespace mc {
 
 	inline constexpr size_t operator "" _B (unsigned long long x) {
 		return x;

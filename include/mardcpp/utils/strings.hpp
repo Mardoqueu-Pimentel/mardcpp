@@ -6,7 +6,7 @@
 
 #include <mardcpp/std/String.hpp>
 
-namespace mardcpp {
+namespace mc {
 
 	void toLower(String &string);
 

@@ -4,7 +4,7 @@
 
 #include <mardcpp/stream/OutputStream.hpp>
 
-namespace mardcpp {
+namespace mc {
 
 	OutputStream::OutputStream(std::ostream &os)
 		: os(os), padding(' '), paddingNumber(0) {}

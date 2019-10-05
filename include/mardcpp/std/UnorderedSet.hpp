@@ -8,7 +8,7 @@
 
 #include <mardcpp/stream/OutputStream.hpp>
 
-namespace mardcpp {
+namespace mc {
 
 	template<typename T> using UnorderedSet = std::unordered_set<T>;
 

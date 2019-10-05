@@ -6,7 +6,7 @@
 
 #include <string>
 
-namespace mardcpp {
+namespace mc {
 
 	using String = std::string;
 

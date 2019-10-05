@@ -11,25 +11,28 @@
 
 #include <mardcpp/stream/OutputStream.hpp>
 #include <mardcpp/std/Vector.hpp>
+#include <mardcpp/std/UnorderedSet.hpp>
 
-namespace mardcpp {
+namespace mc {
 
 	class Arguments {
 
 	public:
 		using Arg = String;
 		using Args = Vector<Arg>;
+		using ExistingArgs = UnorderedSet<String>;
 		using Kwarg = Pair<Arg, String>;
 		using Kwargs = UnorderedMap<Kwarg::first_type, Kwarg::second_type>;
 
 	private:
 		Args mArgs;
 		Kwargs mKwargs;
+		ExistingArgs mExistingArgs;
 
 		bool mNextIsValue;
 		std::string mNextKey;
 
-		void parseCommands(size_t i, const String &string) noexcept;
+		void parseCommand(size_t i, const String &string) noexcept;
 
 		void parse(const String &string) noexcept;
 
@@ -72,7 +75,7 @@ namespace mardcpp {
 
 		inline const Kwargs& getKwargs() const noexcept;
 
-		friend OutputStream& operator<<(mardcpp::OutputStream &os, const mardcpp::Arguments &arguments);
+		friend OutputStream& operator<<(mc::OutputStream &os, const mc::Arguments &arguments);
 
 		template<typename T>
 		inline T operator[](size_t i) const {

@@ -3,18 +3,20 @@
 //
 
 #include <regex>
-
 #include <mardcpp/utils/Arguments.hpp>
 
-namespace mardcpp {
+namespace mc {
 
 	Arguments::Arguments(int argc, const char **argv) noexcept
 	: mNextIsValue(false) {
 		for (size_t i = 0; i < static_cast<size_t>(argc); ++i) {
-			parseCommands(i, argv[i]);
+			parseCommand(i, argv[i]);
 		}
 		if (mNextIsValue) {
 			mArgs.emplace_back(mNextKey);
+		}
+		for (const auto &arg : mArgs) {
+			mExistingArgs.insert(arg);
 		}
 	}
 
@@ -27,14 +29,14 @@ namespace mardcpp {
 	}
 
 	bool Arguments::has(const Arguments::Arg &arg) const noexcept {
-		return mKwargs.find(arg) != mKwargs.end();
+		return mExistingArgs.find(arg) != mExistingArgs.end();
 	}
 
 	bool Arguments::has(size_t i) const noexcept {
 		return i < mArgs.size();
 	}
 
-	OutputStream &operator<<(mardcpp::OutputStream &os, const mardcpp::Arguments &arguments) {
+	OutputStream &operator<<(mc::OutputStream &os, const mc::Arguments &arguments) {
 		os << "Args: " << arguments.mArgs << '\n';
 		os << "Kwargs: " << arguments.mKwargs << '\n';
 		return os;
@@ -49,7 +51,7 @@ namespace mardcpp {
 		}
 	}
 
-	void Arguments::parseCommands(size_t i, const String &string) noexcept {
+	void Arguments::parseCommand(size_t i, const String &string) noexcept {
 		if (mNextIsValue) {
 			mNextIsValue = false;
 			if (string[0] != '-' or string[1] != '-') {

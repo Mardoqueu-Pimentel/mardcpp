@@ -4,6 +4,6 @@
 
 #include <mardcpp/mardcpp.hpp>
 
-namespace mardcpp {
+namespace mc {
 
 }

@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-namespace mardcpp::time {
+namespace mc::time {
 
 	Timer::~Timer() {
 		auto total = steady_clock::now() - start;
@@ -16,7 +16,7 @@ namespace mardcpp::time {
 	Timer::Timer(Time &time)
 			:	time(time), start(steady_clock::now()) {}
 
-	void Time::set(const mardcpp::time::NanoDuration &duration) {
+	void Time::set(const mc::time::NanoDuration &duration) {
 		s = duration_cast<seconds>(duration).count();
 
 		m = duration_cast<milliseconds>(duration).count();

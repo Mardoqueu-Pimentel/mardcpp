@@ -4,7 +4,7 @@
 
 #include <mardcpp/stream/InputStream.hpp>
 
-namespace mardcpp {
+namespace mc {
 
 	InputStream::InputStream(std::istream &is)
 		: is(is) {}

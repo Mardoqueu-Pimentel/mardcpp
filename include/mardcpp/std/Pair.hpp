@@ -8,7 +8,7 @@
 
 #include <mardcpp/stream/OutputStream.hpp>
 
-namespace mardcpp {
+namespace mc {
 
 	template<typename F, typename S> using Pair = std::pair<F,S>;
 

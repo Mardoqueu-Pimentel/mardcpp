@@ -8,7 +8,7 @@
 
 #include <mardcpp/stream/OutputStream.hpp>
 
-namespace mardcpp {
+namespace mc {
 
 	template<typename K, typename V> using UnorderedMap = std::unordered_map<K,V>;
 

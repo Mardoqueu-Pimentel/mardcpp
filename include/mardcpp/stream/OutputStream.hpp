@@ -7,7 +7,7 @@
 #include <iostream>
 #include <iomanip>
 
-namespace mardcpp {
+namespace mc {
 
 	using std::istream;
 	using std::ostream;
