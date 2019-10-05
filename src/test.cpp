@@ -2,15 +2,13 @@
 // Created by mard on 10/3/19.
 //
 
-#include <mardcpp/test.hpp>
-#include <mardcpp/utils/Arguments.hpp>
+#include <mardcpp/utils/application.hpp>
+#include <mardcpp/stream/OutputStream.hpp>
 
-int app(const mardcpp::Arguments &args) {
+int mardcpp::application(const mardcpp::Arguments &arguments) {
+
+	mardcpp::os << arguments << '\n';
 
 
 	return 0;
-}
-
-int main(int argc, const char **argv) {
-	return app(mardcpp::Arguments(argc, argv));
 }

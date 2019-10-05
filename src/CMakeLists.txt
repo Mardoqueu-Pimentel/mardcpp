@@ -39,7 +39,6 @@ target_include_directories(${PROJECT_NAME}
 )
 
 set(TEST_HEADERS
-	${HEADERS_PATH}/test.hpp
 )
 
 set(TEST_SOURCES
