@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <stdexcept>
 #include <sstream>
-
+#include <exception>
+#include <cstdarg>
 #include <mardcpp/mardcpp.hpp>
 #include <mardcpp/std/String.hpp>
 #include <array>
@@ -77,4 +77,16 @@ namespace mc {
 
 	std::string __attribute__ ((__format__ (__printf__, 1, 2)))
 	sfmt(const char *__restrict format, ...) noexcept;
+
+	template<typename Error = std::runtime_error>
+	Error __attribute__ ((__format__ (__printf__, 1, 2)))
+	makeError(const char *__restrict format, ...) noexcept {
+		va_list args;
+		va_start(args, format);
+		vsnprintf(gb::getSharedBuffer().data(), gb::getSharedBuffer().size(), format, args);
+		va_end(args);
+
+		return Error(gb::getSharedBuffer().data());
+	}
+
 }

@@ -62,6 +62,20 @@ namespace mc {
 			return *this;
 		}
 
+		template<typename T, size_t N>
+		void output(const std::array<T, N> &array, char sep) {
+			auto it = array.begin(), end = array.end();
+			if (it != end) {
+				auto nextIt = it;
+				while (++nextIt != end) {
+					*this << *it;
+					os << sep;
+					it = nextIt;
+				}
+				*this << *it;
+			}
+		}
+
 		template<template<typename ...> class Container, typename ... Ts>
 		void output(const Container<Ts...> &cont, char sep) {
 			auto it = cont.begin(), end = cont.end();

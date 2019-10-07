@@ -10,7 +10,7 @@ namespace mc {
 	Arguments::Arguments(int argc, const char **argv) noexcept
 	: mNextIsValue(false) {
 		for (size_t i = 0; i < static_cast<size_t>(argc); ++i) {
-			parseCommand(i, argv[i]);
+			parseCommand(argv[i]);
 		}
 		if (mNextIsValue) {
 			mArgs.emplace_back(mNextKey);
@@ -51,7 +51,7 @@ namespace mc {
 		}
 	}
 
-	void Arguments::parseCommand(size_t i, const String &string) noexcept {
+	void Arguments::parseCommand(const String &string) noexcept {
 		if (mNextIsValue) {
 			mNextIsValue = false;
 			if (string[0] != '-' or string[1] != '-') {

@@ -32,7 +32,7 @@ namespace mc {
 		bool mNextIsValue;
 		std::string mNextKey;
 
-		void parseCommand(size_t i, const String &string) noexcept;
+		void parseCommand(const String &string) noexcept;
 
 		void parse(const String &string) noexcept;
 

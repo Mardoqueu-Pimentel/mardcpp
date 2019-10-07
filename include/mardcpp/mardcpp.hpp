@@ -4,26 +4,11 @@
 
 #pragma once
 
-#include <cstdint>
 #include <cmath>
+#include <cstdint>
+#include <string_view>
 
 namespace mc {
-
-	inline constexpr size_t operator "" _B (unsigned long long x) {
-		return x;
-	}
-
-	inline constexpr size_t operator "" _KB (unsigned long long x) {
-		return x * 1024;
-	}
-
-	inline constexpr size_t operator "" _MB (unsigned long long x) {
-		return x * 1024 * 1024;
-	}
-
-	inline constexpr size_t operator "" _GB (unsigned long long x) {
-		return x * 1024 * 1024 * 1024;
-	}
 
 	using i08 = int8_t;
 	using i16 = int16_t;
@@ -40,5 +25,26 @@ namespace mc {
 	using f80 = long double;
 
 	using Index = size_t;
+	using Size = size_t;
+
+	using Char = char;
+	using StringView = std::string_view;
 }
 
+inline constexpr mc::Size operator "" _B (unsigned long long x) {
+	return x;
+}
+
+inline constexpr mc::Size operator "" _KB (unsigned long long x) {
+	return x * 1024;
+}
+
+inline constexpr mc::Size operator "" _MB (unsigned long long x) {
+	return x * 1024 * 1024;
+}
+
+inline constexpr mc::Size operator "" _GB (unsigned long long x) {
+	return x * 1024 * 1024 * 1024;
+}
+
+using std::string_view_literals::operator""sv;
