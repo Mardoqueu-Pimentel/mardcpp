@@ -5,7 +5,6 @@
 #include <mardcpp/utils/Arguments.hpp>
 #include <mardcpp/utils/Env.hpp>
 #include <mardcpp/stream/OutputStream.hpp>
-#include <mardcpp/std/String.hpp>
 
 namespace mc {
 
@@ -13,10 +12,8 @@ namespace mc {
 }
 
 int main(int argc, const char * argv[]) {
+	mc::os << "Running in " << mc::global::ENV << " environment" << "\n";
 	const mc::Arguments arguments(argc, argv);
 	mc::os << arguments << '\n';
-	mc::gb::env = arguments.getOrDefault("env", mc::Env());
-	mc::os << "Running in " << mc::gb::env << " environment" << "\n\n";
-
 	return mc::app(arguments);
 }

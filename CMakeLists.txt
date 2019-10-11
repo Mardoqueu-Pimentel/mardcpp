@@ -33,10 +33,9 @@ set(HEADERS
 	${HEADERS_PATH}/utils/Env.hpp
 	${HEADERS_PATH}/utils/hash.hpp
 	${HEADERS_PATH}/std/Array.hpp
-)
+	include/mardcpp/utils/Logger.hpp)
 set(SOURCES_PATH ${PROJECT_SOURCE_DIR}/src)
 set(SOURCES
-	${SOURCES_PATH}/mardcpp.cpp
 	${SOURCES_PATH}/time.cpp
 	${SOURCES_PATH}/utils/util.cpp
 	${SOURCES_PATH}/utils/Arguments.cpp
@@ -52,12 +51,31 @@ target_include_directories(${TARGET_MARDCPP}
 		${PROJECT_SOURCE_DIR}/lib/random/include
 )
 
-set(INC_PATH ${PROJECT_SOURCE_DIR}/include)
-set(LIB_RANDOM_INC ${PROJECT_SOURCE_DIR}/lib/random/include)
 set_target_properties(${TARGET_MARDCPP} PROPERTIES
 	CXX_STANDARD 17
 	POSITION_INDEPENDENT_CODE ON
+	PREFIX ""
 )
+
+set(TARGET_MARDCPPTEST mardcpptest)
+add_executable(${TARGET_MARDCPPTEST} src/app.cpp)
+set_target_properties(${TARGET_MARDCPPTEST} PROPERTIES
+	CXX_STANDARD 17
+)
+target_link_libraries(${TARGET_MARDCPPTEST} ${TARGET_MARDCPP})
+
+if (${CMAKE_BUILD_TYPE} MATCHES "Debug")
+	message("development environment activated")
+	set(ENVIRONMENT Env::DEVELOPMENT)
+elseif(${CMAKE_BUILD_TYPE} MATCHES "Release")
+	message("production environment activated")
+	set(ENVIRONMENT Env::PRODUCTION)
+endif()
+
+if (DEFINED ENVIRONMENT)
+	target_compile_definitions(${TARGET_MARDCPP} PRIVATE ENVIRONMENT=${ENVIRONMENT})
+	target_compile_definitions(${TARGET_MARDCPPTEST} PRIVATE ENVIRONMENT=${ENVIRONMENT})
+endif()
 
 if (MSVC)
 	target_compile_options(${TARGET_MARDCPP}

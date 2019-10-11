@@ -12,9 +12,9 @@ namespace mc {
 	const char * fmt(const char *__restrict format, ...) noexcept {
 		va_list args;
 		va_start(args, format);
-		vsnprintf(gb::getSharedBuffer().data(), gb::getSharedBuffer().size(), format, args);
+		vsnprintf(global::getSharedBuffer().data(), global::getSharedBuffer().size(), format, args);
 		va_end(args);
-		return gb::getSharedBuffer().data();
+		return global::getSharedBuffer().data();
 	}
 
 	std::string sfmt(const char *__restrict format, ...) noexcept {

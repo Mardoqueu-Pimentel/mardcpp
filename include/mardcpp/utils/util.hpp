@@ -14,7 +14,7 @@
 
 namespace mc {
 
-	namespace gb {
+	namespace global {
 		template<size_t size = 4_KB>
 		std::array<char, size> &getSharedBuffer() {
 			static std::array<char, size> buffer;
@@ -83,10 +83,10 @@ namespace mc {
 	makeError(const char *__restrict format, ...) noexcept {
 		va_list args;
 		va_start(args, format);
-		vsnprintf(gb::getSharedBuffer().data(), gb::getSharedBuffer().size(), format, args);
+		vsnprintf(global::getSharedBuffer().data(), global::getSharedBuffer().size(), format, args);
 		va_end(args);
 
-		return Error(gb::getSharedBuffer().data());
+		return Error(global::getSharedBuffer().data());
 	}
 
 }

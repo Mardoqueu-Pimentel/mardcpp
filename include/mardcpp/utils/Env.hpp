@@ -4,88 +4,60 @@
 
 #pragma once
 
+#include <iostream>
 #include <mardcpp/mardcpp.hpp>
-#include <mardcpp/utils/util.hpp>
-#include <iosfwd>
-#include <functional>
-
+#include <mardcpp/std/UnorderedMap.hpp>
 
 namespace mc {
 
 	class Env {
 	public:
-		enum class Value: u08 { DEVELOPMENT, STAGE, PRODUCTION };
-		inline static const Value DEFAULT = Value::DEVELOPMENT;
-		inline static const String STR_DEVELOPMENT = "development";
-		inline static const String STR_STAGE = "stage";
-		inline static const String STR_PRODUCTION = "production";
+		enum {
+			DEVELOPMENT,
+			STAGE,
+			PRODUCTION
+		};
+
+		using Value = decltype(Env::DEVELOPMENT);
+
+		constexpr static inline auto STR_DEVELOPMENT = "development"sv;
+		constexpr static inline auto STR_STAGE = "stage"sv;
+		constexpr static inline auto STR_PRODUCTION = "production"sv;
 
 	private:
-		Value mValue;
+		Value mEnv;
 
 	public:
-		constexpr Env()
-			: mValue(DEFAULT) {}
-		constexpr Env(const Value& value)
-			: mValue(value) {}
 
-		constexpr operator Value() const noexcept {
-			return mValue;
+		constexpr Env(const Value& value = Env::DEVELOPMENT)
+			: mEnv(value) {}
+
+		constexpr mc::Size operator==(const Env::Value &env) const noexcept {
+			return mEnv == env;
 		}
 
-		constexpr bool operator==(const Env& env) const noexcept {
-			return mValue == env;
-		}
-		constexpr bool operator!=(const Env& env) const noexcept {
-			return mValue != env;
-		}
-
-		operator const String&() const noexcept {
-			switch (mValue) {
-				case Value::DEVELOPMENT:
-					return STR_DEVELOPMENT;
-				case Value::STAGE:
-					return STR_STAGE;
-				case Value::PRODUCTION:
-					return STR_PRODUCTION;
-				default:
-					return STR_DEVELOPMENT;
+		constexpr operator const mc::StringView & () const noexcept {
+			switch (mEnv) {
+				case DEVELOPMENT:
+					return Env::STR_DEVELOPMENT;
+				case STAGE:
+					return Env::STR_STAGE;
+				case PRODUCTION:
+					return Env::STR_PRODUCTION;
 			}
+			return STR_DEVELOPMENT;
 		}
 
-		friend std::istream& operator>>(std::istream &is, Env &env) {
-			using KT = const String;
-			using K = std::reference_wrapper<KT>;
-			using V = Env;
-			using H = RefHasher<KT>;
-			using C = RefEq<KT>;
-
-			std::unordered_map<K, V, H, C> ENV_TO_STRING = {
-				{ Env::STR_DEVELOPMENT, Env(Env::Value::DEVELOPMENT) },
-				{ Env::STR_STAGE, Env(Env::Value::STAGE)},
-				{ Env::STR_PRODUCTION, Env(Env::Value::PRODUCTION) }
-			};
-
-			String word = env; is >> word;
-
-			auto it = ENV_TO_STRING.find(word);
-			if (it != ENV_TO_STRING.end()) {
-				env.mValue = it->second;
-			} else {
-				env.mValue = DEFAULT;
-			}
-
-			return is;
-		}
-
-		friend std::ostream& operator<<(std::ostream &os, const Env &env) {
-			const String& string = env;
-			os << string;
+		friend std::ostream &operator<<(std::ostream &os, const Env &env) {
+			os << static_cast<const mc::StringView &>(env);
 			return os;
 		}
 	};
 
-	namespace gb {
-		static inline Env env;
+	namespace global {
+#ifndef ENVIRONMENT
+#define ENVIRONMENT Env::DEVELOPMENT
+#endif
+		static inline constexpr Env ENV{ENVIRONMENT};
 	}
 }

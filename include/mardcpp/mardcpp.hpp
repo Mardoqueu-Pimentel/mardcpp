@@ -28,7 +28,26 @@ namespace mc {
 	using Size = size_t;
 
 	using Char = char;
+	using Int = i32;
+	using Long = i64;
+	using Flt = f32;
+	using Dbl = f64;
+
 	using StringView = std::string_view;
+
+	template<typename T>
+	struct Hash {
+		mc::Size operator()(const T& value) const noexcept {
+			return std::hash<T>()(value);
+		}
+	};
+
+	template<typename T>
+	struct Equal {
+		bool operator()(const T &x, const T &y) const noexcept {
+			return x == y;
+		}
+	};
 }
 
 inline constexpr mc::Size operator "" _B (unsigned long long x) {
@@ -48,3 +67,4 @@ inline constexpr mc::Size operator "" _GB (unsigned long long x) {
 }
 
 using std::string_view_literals::operator""sv;
+
