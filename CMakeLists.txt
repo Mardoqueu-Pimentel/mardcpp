@@ -33,7 +33,10 @@ set(HEADERS
 	${HEADERS_PATH}/utils/Env.hpp
 	${HEADERS_PATH}/utils/hash.hpp
 	${HEADERS_PATH}/std/Array.hpp
-	include/mardcpp/utils/Logger.hpp)
+	${HEADERS_PATH}/utils/Logger.hpp
+	${HEADERS_PATH}/std/List.hpp
+
+)
 set(SOURCES_PATH ${PROJECT_SOURCE_DIR}/src)
 set(SOURCES
 	${SOURCES_PATH}/time.cpp
@@ -43,6 +46,7 @@ set(SOURCES
 	${SOURCES_PATH}/stream/InputStream.cpp
 	${SOURCES_PATH}/stream/OutputStream.cpp
 	${SOURCES_PATH}/utils/hash.cpp
+
 )
 add_library(${TARGET_MARDCPP} ${HEADERS} ${SOURCES})
 target_include_directories(${TARGET_MARDCPP}

@@ -12,8 +12,8 @@ namespace mc {
 }
 
 int main(int argc, const char * argv[]) {
-	mc::os << "Running in " << mc::global::ENV << " environment" << "\n";
+	mc::cout << "Running in " << mc::global::ENV << " environment" << "\n";
 	const mc::Arguments arguments(argc, argv);
-	mc::os << arguments << '\n';
+	mc::cout << arguments << '\n';
 	return mc::app(arguments);
 }

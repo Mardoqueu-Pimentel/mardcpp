@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <list>
 
 namespace mc {
 
@@ -33,6 +34,12 @@ namespace mc {
 		inline OutputStream &operator<<(const unsigned char &e);
 
 		inline OutputStream &operator<<(const signed char &e);
+
+		template<typename T>
+		inline OutputStream &operator<<(const std::unique_ptr<T> &ptr) {
+			*this << *ptr;
+			return *this;
+		}
 
 		template<typename T, size_t N>
 		inline OutputStream &operator<<(const T (&arr)[N]) {
@@ -91,5 +98,5 @@ namespace mc {
 		}
 	};
 
-	static inline auto os = OutputStream(std::cout);
+	static inline auto cout = OutputStream(std::cout);
 }

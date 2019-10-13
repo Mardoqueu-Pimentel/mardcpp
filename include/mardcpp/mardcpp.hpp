@@ -26,6 +26,7 @@ namespace mc {
 
 	using Index = size_t;
 	using Size = size_t;
+	using Count = size_t;
 
 	using Char = char;
 	using Int = i32;
