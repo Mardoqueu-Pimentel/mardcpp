@@ -4,12 +4,9 @@
 
 #pragma once
 
-#include <csignal>
+#include <mardcpp/utils/def.hpp>
 
-#include <mardcpp/mardcpp.hpp>
-#include <iostream>
-
-namespace mc {
+namespace mardCpp {
 
 	class Logger {
 
@@ -33,7 +30,7 @@ namespace mc {
 		static inline auto sLevel = Level::INFO;
 
 		static inline bool initialized = ([](){
-			std::signal(SIGUSR1, [](int signal){
+			std::signal(SIGUSR1, [](int){
 				Logger::Level tmp = Logger::sLevel;
 				std::cout << "SIGUSR1 received. Changing log level from " << tmp << " to " << ++Logger::sLevel << '\n';
 			});

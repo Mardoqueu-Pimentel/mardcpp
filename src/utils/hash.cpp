@@ -3,8 +3,9 @@
 //
 
 #include <mardcpp/utils/hash.hpp>
+#include <mardcpp/utils/util.hpp>
 
-namespace mc {
+namespace mardCpp {
 
 	Size nextPrimeOf(Size n) {
 		for (Size i = n; i <= 0xFFFFFFFFFFFFFFFF; ++i) {

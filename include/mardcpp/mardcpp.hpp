@@ -4,68 +4,12 @@
 
 #pragma once
 
-#include <cmath>
-#include <cstdint>
-#include <string_view>
-
-namespace mc {
-
-	using i08 = int8_t;
-	using i16 = int16_t;
-	using i32 = int32_t;
-	using i64 = int64_t;
-
-	using u08 = uint8_t;
-	using u16 = uint16_t;
-	using u32 = uint32_t;
-	using u64 = uint64_t;
-
-	using f32 = float_t;
-	using f64 = double_t;
-	using f80 = long double;
-
-	using Index = size_t;
-	using Size = size_t;
-	using Count = size_t;
-
-	using Char = char;
-	using Int = i32;
-	using Long = i64;
-	using Flt = f32;
-	using Dbl = f64;
-
-	using StringView = std::string_view;
-
-	template<typename T>
-	struct Hash {
-		mc::Size operator()(const T& value) const noexcept {
-			return std::hash<T>()(value);
-		}
-	};
-
-	template<typename T>
-	struct Equal {
-		bool operator()(const T &x, const T &y) const noexcept {
-			return x == y;
-		}
-	};
-}
-
-inline constexpr mc::Size operator "" _B (unsigned long long x) {
-	return x;
-}
-
-inline constexpr mc::Size operator "" _KB (unsigned long long x) {
-	return x * 1024;
-}
-
-inline constexpr mc::Size operator "" _MB (unsigned long long x) {
-	return x * 1024 * 1024;
-}
-
-inline constexpr mc::Size operator "" _GB (unsigned long long x) {
-	return x * 1024 * 1024 * 1024;
-}
-
-using std::string_view_literals::operator""sv;
-
+#include <mardcpp/collections/collections.hpp>
+#include <mardcpp/Array.hpp>
+#include <mardcpp/List.hpp>
+#include <mardcpp/Map.hpp>
+#include <mardcpp/Pair.hpp>
+#include <mardcpp/String.hpp>
+#include <mardcpp/UnorderedMap.hpp>
+#include <mardcpp/UnorderedSet.hpp>
+#include <mardcpp/Vector.hpp>

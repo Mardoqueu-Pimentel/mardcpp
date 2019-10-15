@@ -10,21 +10,7 @@
 #include <mardcpp/utils/Logger.hpp>
 
 
-int mc::app(const mc::Arguments &arguments) {
-
-
-	using std::chrono::operator ""s;
-
-	while (true) {
-		Logger::debug("testing", "the", "debugger", "with", "logging", "=", "debug");
-		Logger::info("testing", "the", "debugger", "with", "logging", "=", "info");
-		Logger::warn("testing", "the", "debugger", "with", "logging", "=", "warn");
-		Logger::error("testing", "the", "debugger", "with", "logging", "=", "error");
-		Logger::fatal("testing", "the", "debugger", "with", "logging", "=", "fatal");
-
-		std::this_thread::sleep_for(1s);
-	}
-
+int mardCpp::app(const mardCpp::Arguments &) {
 
 	return 0;
 }

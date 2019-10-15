@@ -5,16 +5,19 @@
 #pragma once
 
 #include <iostream>
+#include <mardcpp/stream/def.hpp>
 
-namespace mc {
+namespace mardCpp::inputStream {
+
+	using std::istream;
 
 	class InputStream {
 		std::istream &is;
 	public:
 		explicit InputStream(std::istream &is);
 
-		template<typename T>
-		inline InputStream &operator>>(T &e) {
+		template<typename tType>
+		inline InputStream &operator>>(tType &e) {
 			is >> e;
 			return *this;
 		}
@@ -23,8 +26,8 @@ namespace mc {
 
 		inline InputStream &operator>>(signed char &e);
 
-		template<typename T, size_t N>
-		inline InputStream &operator>>(T (&arr)[N]) {
+		template<typename tType, Size tN>
+		inline InputStream &operator>>(tType (&arr)[tN]) {
 			for (auto &e : arr) { *this >> e; }
 			return *this;
 		}

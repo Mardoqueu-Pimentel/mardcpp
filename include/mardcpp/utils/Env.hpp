@@ -4,11 +4,9 @@
 
 #pragma once
 
-#include <iostream>
-#include <mardcpp/mardcpp.hpp>
-#include <mardcpp/std/UnorderedMap.hpp>
+#include <mardcpp/utils/def.hpp>
 
-namespace mc {
+namespace mardCpp {
 
 	class Env {
 	public:
@@ -32,11 +30,11 @@ namespace mc {
 		constexpr Env(const Value& value = Env::DEVELOPMENT)
 			: mEnv(value) {}
 
-		constexpr mc::Size operator==(const Env::Value &env) const noexcept {
+		constexpr Size operator==(const Env::Value &env) const noexcept {
 			return mEnv == env;
 		}
 
-		constexpr operator const mc::StringView & () const noexcept {
+		constexpr operator const StringView & () const noexcept {
 			switch (mEnv) {
 				case DEVELOPMENT:
 					return Env::STR_DEVELOPMENT;
@@ -49,7 +47,7 @@ namespace mc {
 		}
 
 		friend std::ostream &operator<<(std::ostream &os, const Env &env) {
-			os << static_cast<const mc::StringView &>(env);
+			os << static_cast<const StringView &>(env);
 			return os;
 		}
 	};

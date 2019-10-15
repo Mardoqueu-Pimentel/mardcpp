@@ -5,12 +5,9 @@
 #pragma once
 
 #include <chrono>
-#include <iosfwd>
-#include <string>
+#include <mardcpp/utils/def.hpp>
 
-#include <mardcpp/mardcpp.hpp>
-
-namespace mc::time {
+namespace mardCpp::time {
 
 	using std::chrono::duration;
 	using std::chrono::duration_cast;
@@ -43,3 +40,10 @@ namespace mc::time {
 		~Timer();
 	};
 }
+
+using std::chrono_literals::operator ""ns;
+using std::chrono_literals::operator ""us;
+using std::chrono_literals::operator ""ms;
+using std::chrono_literals::operator ""s;
+using std::chrono_literals::operator ""min;
+using std::chrono_literals::operator ""h;

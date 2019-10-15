@@ -5,10 +5,10 @@
 #include <mardcpp/utils/strings.hpp>
 #include <algorithm>
 
-void mc::toLower(mc::String &string) {
+void mardCpp::toLower(mardCpp::String &string) {
 	std::transform(string.begin(), string.end(), string.begin(), ::tolower);
 }
 
-void mc::toUpper(mc::String &string) {
+void mardCpp::toUpper(mardCpp::String &string) {
 	std::transform(string.begin(), string.end(), string.begin(), ::toupper);
 }

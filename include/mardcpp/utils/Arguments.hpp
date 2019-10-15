@@ -4,16 +4,15 @@
 
 #pragma once
 
-#include <mardcpp/std/Pair.hpp>
-#include <mardcpp/std/String.hpp>
-#include <mardcpp/std/UnorderedMap.hpp>
+#include <mardcpp/utils/def.hpp>
+#include <mardcpp/String.hpp>
+#include <mardcpp/Vector.hpp>
+#include <mardcpp/UnorderedSet.hpp>
+#include <mardcpp/Pair.hpp>
+#include <mardcpp/UnorderedMap.hpp>
 #include <mardcpp/utils/util.hpp>
 
-#include <mardcpp/stream/OutputStream.hpp>
-#include <mardcpp/std/Vector.hpp>
-#include <mardcpp/std/UnorderedSet.hpp>
-
-namespace mc {
+namespace mardCpp {
 
 	class Arguments {
 
@@ -60,7 +59,7 @@ namespace mc {
 		}
 
 		template<typename T = String>
-		T get(size_t i) const {
+		T get(Size i) const {
 			if (i < mArgs.size()) {
 				return toType<T>(mArgs[i]);
 			}
@@ -69,16 +68,16 @@ namespace mc {
 
 		bool has(const Arg& arg) const noexcept;
 
-		bool has(size_t i) const noexcept;
+		bool has(Size i) const noexcept;
 
 		inline const Args& getArgs() const noexcept;
 
 		inline const Kwargs& getKwargs() const noexcept;
 
-		friend OutputStream& operator<<(mc::OutputStream &os, const mc::Arguments &arguments);
+		friend OutputStream& operator<<(mardCpp::OutputStream &os, const mardCpp::Arguments &arguments);
 
 		template<typename T>
-		inline T operator[](size_t i) const {
+		inline T operator[](Size i) const {
 			return get<T>(i);
 		}
 	};

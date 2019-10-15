@@ -4,18 +4,17 @@
 
 #pragma once
 
-#include <utility>
-#include <cassert>
+#include <mardcpp/collections/def.hpp>
 
-namespace mc {
+namespace mardCpp {
 
-	template<typename T>
+	template<typename tType>
 	class LinkedList {
 		struct Node {
-			T val;
+			tType val;
 			Node *next;
 
-			Node(T val)
+			Node(tType val)
 			: val(val) {}
 		};
 
@@ -35,7 +34,7 @@ namespace mc {
 				return node != iter.node;
 			}
 
-			T& operator*() {
+			tType& operator*() {
 				assert(node != nullptr && "Iter out of bounds");
 				return node->val;
 			}
@@ -57,7 +56,7 @@ namespace mc {
 			}
 		}
 
-		void add(T val) {
+		void add(tType val) {
 			Node *node = new Node(val);
 			if (first) {
 				node->next = first;
@@ -68,7 +67,7 @@ namespace mc {
 			++size;
 		}
 
-		void addBack(T val) {
+		void addBack(tType val) {
 			Node *node = new Node(val);
 			if (first) {
 				last->next = node;

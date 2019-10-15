@@ -7,7 +7,7 @@
 #include <cstdarg>
 #include <iostream>
 
-namespace mc {
+namespace mardCpp {
 
 	const char * fmt(const char *__restrict format, ...) noexcept {
 		va_list args;

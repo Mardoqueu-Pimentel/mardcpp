@@ -4,19 +4,18 @@
 
 #pragma once
 
-#include <sstream>
-#include <exception>
 #include <cstdarg>
-#include <mardcpp/mardcpp.hpp>
-#include <mardcpp/std/String.hpp>
-#include <array>
-#include <mardcpp/mardcpp.hpp>
+#include <stdexcept>
+#include <sstream>
+#include <mardcpp/utils/def.hpp>
+#include <mardcpp/String.hpp>
+#include <mardcpp/Array.hpp>
 
-namespace mc {
+namespace mardCpp {
 
 	namespace global {
-		template<size_t size = 4_KB>
-		std::array<char, size> &getSharedBuffer() {
+		template<Size size = 4_KB>
+		Array<char, size> &getSharedBuffer() {
 			static std::array<char, size> buffer;
 			return buffer;
 		}
@@ -59,7 +58,7 @@ namespace mc {
 	struct RefHasher {
 		using RefType = std::reference_wrapper<T>;
 		static constexpr auto hash = std::hash<typename std::remove_const<T>::type>();
-		size_t operator()(const RefType &ref) const {
+		Size operator()(const RefType &ref) const {
 			return hash(ref.get());
 		}
 	};

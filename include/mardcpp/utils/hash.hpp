@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <mardcpp/mardcpp.hpp>
-#include <mardcpp/utils/util.hpp>
+#include <utility>
+#include <mardcpp/utils/def.hpp>
 
-namespace mc {
+namespace mardCpp {
 
 struct primes {
 

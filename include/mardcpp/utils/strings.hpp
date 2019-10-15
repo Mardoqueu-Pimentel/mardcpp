@@ -4,9 +4,10 @@
 
 #pragma once
 
-#include <mardcpp/std/String.hpp>
+#include <mardcpp/utils/def.hpp>
+#include <mardcpp/String.hpp>
 
-namespace mc {
+namespace mardCpp {
 
 	void toLower(String &string);
 

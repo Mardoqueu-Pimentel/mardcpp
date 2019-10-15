@@ -4,9 +4,9 @@
 
 #include <mardcpp/stream/OutputStream.hpp>
 
-namespace mc {
+namespace mardCpp::outputStream {
 
-	OutputStream::OutputStream(std::ostream &os)
+	OutputStream::OutputStream(ostream &os)
 		: os(os), padding(' '), paddingNumber(0) {}
 
 	OutputStream &OutputStream::operator<<(const unsigned char &e) {

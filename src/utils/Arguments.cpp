@@ -5,7 +5,7 @@
 #include <regex>
 #include <mardcpp/utils/Arguments.hpp>
 
-namespace mc {
+namespace mardCpp {
 
 	Arguments::Arguments(int argc, const char **argv) noexcept
 	: mNextIsValue(false) {
@@ -36,7 +36,7 @@ namespace mc {
 		return i < mArgs.size();
 	}
 
-	OutputStream &operator<<(mc::OutputStream &os, const mc::Arguments &arguments) {
+	OutputStream &operator<<(mardCpp::OutputStream &os, const mardCpp::Arguments &arguments) {
 		os << "Args: " << arguments.mArgs << '\n';
 		os << "Kwargs: " << arguments.mKwargs << '\n';
 		return os;

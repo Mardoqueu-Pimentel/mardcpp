@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include <iostream>
 #include <iomanip>
-#include <list>
+#include <iostream>
+#include <mardcpp/stream/def.hpp>
 
-namespace mc {
+namespace mardCpp::outputStream {
 
 	using std::istream;
 	using std::ostream;
@@ -17,13 +17,13 @@ namespace mc {
 		std::ostream &os;
 
 	public:
-		char padding;
-		int paddingNumber;
+		Char padding;
+		Int paddingNumber;
 
-		explicit OutputStream(std::ostream &os);
+		explicit OutputStream(ostream &os);
 
-		template<typename T>
-		inline OutputStream &operator<<(const T &e) {
+		template<typename tType>
+		inline OutputStream &operator<<(const tType &e) {
 			if (paddingNumber) {
 				os << std::setw(paddingNumber) << std::setfill(padding);
 			}
@@ -31,67 +31,45 @@ namespace mc {
 			return *this;
 		}
 
-		inline OutputStream &operator<<(const unsigned char &e);
+		inline OutputStream &operator<<(const uc &e);
 
-		inline OutputStream &operator<<(const signed char &e);
+		inline OutputStream &operator<<(const sc &e);
 
-		template<typename T>
-		inline OutputStream &operator<<(const std::unique_ptr<T> &ptr) {
-			*this << *ptr;
+		template<Size tN>
+		inline OutputStream &operator<<(const Char (&arr)[tN]) {
+			os << arr;
 			return *this;
 		}
 
-		template<typename T, size_t N>
-		inline OutputStream &operator<<(const T (&arr)[N]) {
-			for (size_t i = 0; i < N; ++i) {
+		template<typename tType, Size tN>
+		inline OutputStream &operator<<(const tType (&arr)[tN]) {
+			for (size_t i = 0; i < tN; ++i) {
 				*this << arr[i];
-				if (i + 1 < N) {
+				if (i + 1 < tN) {
 					*this << ' ';
 				}
 			}
 			return *this;
 		}
 
-		template<size_t N>
-		inline OutputStream &operator<<(const char (&arr)[N]) {
-			os << arr;
-			return *this;
-		}
-
-		template<typename T, size_t N, size_t M>
-		inline OutputStream &operator<<(const T (&arr)[N][M]) {
-			for (int i = 0; i < N; ++i) {
+		template<typename tType, Size tN, Size tM>
+		inline OutputStream &operator<<(const tType (&arr)[tN][tM]) {
+			for (int i = 0; i < tN; ++i) {
 				*this << arr[i];
-				if (i + 1 < N) {
+				if (i + 1 < tN) {
 					os << '\n';
 				}
 			}
 			return *this;
 		}
 
-		template<typename T, size_t N>
-		void output(const std::array<T, N> &array, char sep) {
-			auto it = array.begin(), end = array.end();
+		template<typename tIter>
+		inline void range(tIter it, tIter end, Char separator = ' ') {
 			if (it != end) {
 				auto nextIt = it;
 				while (++nextIt != end) {
 					*this << *it;
-					os << sep;
-					it = nextIt;
-				}
-				*this << *it;
-			}
-		}
-
-		template<template<typename ...> class Container, typename ... Ts>
-		void output(const Container<Ts...> &cont, char sep) {
-			auto it = cont.begin(), end = cont.end();
-			if (it != end) {
-				auto nextIt = it;
-				while (++nextIt != end) {
-					*this << *it;
-					os << sep;
-					it = nextIt;
+					os << separator;
 				}
 				*this << *it;
 			}

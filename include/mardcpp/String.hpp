@@ -5,8 +5,9 @@
 #pragma once
 
 #include <string>
+#include <mardcpp/def.hpp>
 
-namespace mc {
+namespace mardCpp {
 
 	using String = std::string;
 
