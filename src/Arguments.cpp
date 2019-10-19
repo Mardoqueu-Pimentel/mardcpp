@@ -3,12 +3,13 @@
 //
 
 #include <regex>
-#include <mardcpp/utils/Arguments.hpp>
+#include <mardcpp/Arguments.hpp>
+#include <mardcpp/OutStream.hpp>
 
-namespace mardCpp {
+namespace mardCpp::arguments {
 
 	Arguments::Arguments(int argc, const char **argv) noexcept
-	: mNextIsValue(false) {
+		: mNextIsValue(false) {
 		for (size_t i = 0; i < static_cast<size_t>(argc); ++i) {
 			parseCommand(argv[i]);
 		}
@@ -21,7 +22,7 @@ namespace mardCpp {
 	}
 
 	Arguments::Arguments(std::istream &input) noexcept
-	: mNextIsValue(false) {
+		: mNextIsValue(false) {
 		std::string line;
 		for (size_t i = 0; std::getline(input, line); ++i) {
 			parse(line);
@@ -36,7 +37,7 @@ namespace mardCpp {
 		return i < mArgs.size();
 	}
 
-	OutputStream &operator<<(mardCpp::OutputStream &os, const mardCpp::Arguments &arguments) {
+	OutStream &operator<<(OutStream &os, const Arguments &arguments) {
 		os << "Args: " << arguments.mArgs << '\n';
 		os << "Kwargs: " << arguments.mKwargs << '\n';
 		return os;

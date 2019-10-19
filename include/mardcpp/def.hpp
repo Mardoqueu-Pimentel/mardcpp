@@ -33,8 +33,6 @@ using uli = unsigned long int;
 using slli = signed long long int;
 using ulli = unsigned long long int;
 
-using Count = size_t;
-using Index = size_t;
 using Size = size_t;
 
 using Bool = bool;
@@ -46,7 +44,6 @@ using UInt = u32;
 using ULong = u64;
 using Flt = f32;
 using Dbl = f64;
-
 
 inline constexpr Size operator "" _B (ulli x) {
 	return x;
@@ -67,3 +64,31 @@ inline constexpr Size operator "" _GB (ulli x) {
 using std::string_view_literals::operator ""sv;
 
 using StringView = std::string_view;
+
+struct Hash {
+
+	template<typename tType, typename std::enable_if<std::is_invocable<tType, Hash>::value, bool>::type = true>
+	Size operator()(const tType &value) const noexcept {
+		return value(Hash());
+	}
+
+	template<typename tType, typename std::enable_if<not std::is_invocable<tType, Hash>::value, bool>::type = true>
+	Size operator()(const tType &value) const noexcept {
+		return std::hash<tType>()(value);
+	}
+
+};
+
+struct Equal {
+	template<typename tType>
+	inline bool operator()(const tType &lhe, const tType &rhe) const noexcept {
+		return lhe == rhe;
+	}
+};
+
+struct Less {
+	template<typename tType>
+	inline bool operator()(const tType &lhe, const tType &rhe) const noexcept {
+		return lhe < rhe;
+	}
+};

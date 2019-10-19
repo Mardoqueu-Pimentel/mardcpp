@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.15)
 
 project(mardcpp VERSION 1.0.0 LANGUAGES CXX)
 
@@ -26,40 +26,41 @@ set(TARGET_TEST test)
 file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/*.hpp)
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
+#list(FILTER SOURCES EXCLUDE REGEX ".*app\\.cpp$")
 
 add_library(${TARGET_MARDCPP} ${HEADERS} ${SOURCES})
 target_include_directories(${TARGET_MARDCPP}
 	PUBLIC
-		${PROJECT_SOURCE_DIR}/include
-		${PROJECT_SOURCE_DIR}/lib/random/include
-)
+	${PROJECT_SOURCE_DIR}/include
+	${PROJECT_SOURCE_DIR}/lib/random/include
+	)
 set_target_properties(${TARGET_MARDCPP} PROPERTIES
 	CXX_STANDARD 20
 	POSITION_INDEPENDENT_CODE ON
 	PREFIX ""
-)
+	)
 
 add_executable(${TARGET_TEST} src/app.cpp)
 set_target_properties(${TARGET_TEST} PROPERTIES
 	CXX_STANDARD 20
-)
+	)
 target_link_libraries(${TARGET_TEST} ${TARGET_MARDCPP})
 
 if (DEFINED ENVIRONMENT)
-	target_compile_definitions(${TARGET_MARDCPP} PRIVATE ENVIRONMENT=${ENVIRONMENT})
+	target_compile_definitions(${TARGET_MARDCPP} PUBLIC ENVIRONMENT=${ENVIRONMENT})
 endif()
 
 if (MSVC)
 	target_compile_options(${TARGET_MARDCPP}
 		PRIVATE /W4 /WX
-	)
+		)
 else()
 	target_compile_options(${TARGET_MARDCPP}
 		PRIVATE -Wall -Wextra -pedantic
-	)
+		)
 endif()
 
-find_package(OpenMP)
-if(OpenMP_CXX_FOUND)
-	target_link_libraries(${TARGET_MARDCPP} OpenMP::OpenMP_CXX)
-endif()
+#find_package(OpenMP)
+#if(OpenMP_CXX_FOUND)
+#	target_link_libraries(${TARGET_MARDCPP} OpenMP::OpenMP_CXX)
+#endif()

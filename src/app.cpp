@@ -1,16 +1,11 @@
 //
-// Created by mard on 10/10/19.
+// Created by mard on 10/17/19.
 //
 
+#include <mardcpp/app.hpp>
 
-#include <csignal>
-#include <thread>
+int mardCpp::app::app(const Arguments &arguments) {
 
-#include <mardcpp/utils/app.hpp>
-#include <mardcpp/utils/Logger.hpp>
-
-
-int mardCpp::app(const mardCpp::Arguments &) {
 
 	return 0;
 }

@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <mardcpp/utils/def.hpp>
+#include <mardcpp/def.hpp>
 
 namespace mardCpp {
 
@@ -46,16 +46,21 @@ namespace mardCpp {
 			return STR_DEVELOPMENT;
 		}
 
+		template<typename tFunctor>
+		constexpr void executeIn(const Value &value, const tFunctor &functor) const {
+			if (mEnv == value) {
+				functor();
+			}
+		}
+
 		friend std::ostream &operator<<(std::ostream &os, const Env &env) {
 			os << static_cast<const StringView &>(env);
 			return os;
 		}
 	};
 
-	namespace global {
 #ifndef ENVIRONMENT
 #define ENVIRONMENT Env::DEVELOPMENT
 #endif
-		static inline constexpr Env ENV{ENVIRONMENT};
-	}
+	static inline constexpr Env env{ENVIRONMENT};
 }

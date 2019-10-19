@@ -5,9 +5,12 @@
 #pragma once
 
 #include <chrono>
-#include <mardcpp/utils/def.hpp>
+#include <mardcpp/def.hpp>
+#include <mardcpp/iosfwd.hpp>
 
 namespace mardCpp::time {
+
+	using outStream::OutStream;
 
 	using std::chrono::duration;
 	using std::chrono::duration_cast;
@@ -28,7 +31,7 @@ namespace mardCpp::time {
 
 		void set(const NanoDuration &duration);
 
-		friend std::ostream &operator<<(std::ostream &os, const Time &time);
+		friend OutStream &operator<<(OutStream &os, const Time &time);
 	};
 
 	class Timer {

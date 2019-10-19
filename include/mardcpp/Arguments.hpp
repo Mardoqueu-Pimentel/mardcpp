@@ -4,15 +4,25 @@
 
 #pragma once
 
-#include <mardcpp/utils/def.hpp>
+#include <iosfwd>
+#include <mardcpp/def.hpp>
 #include <mardcpp/String.hpp>
 #include <mardcpp/Vector.hpp>
 #include <mardcpp/UnorderedSet.hpp>
 #include <mardcpp/Pair.hpp>
 #include <mardcpp/UnorderedMap.hpp>
-#include <mardcpp/utils/util.hpp>
+#include <mardcpp/utility.hpp>
 
-namespace mardCpp {
+namespace mardCpp::arguments {
+
+	using outStream::OutStream;
+	using pair::Pair;
+	using string::String;
+	using unorderedMap::UnorderedMap;
+	using unorderedSet::UnorderedSet;
+	using utility::fmt;
+	using utility::toType;
+	using vector::Vector;
 
 	class Arguments {
 
@@ -74,7 +84,7 @@ namespace mardCpp {
 
 		inline const Kwargs& getKwargs() const noexcept;
 
-		friend OutputStream& operator<<(mardCpp::OutputStream &os, const mardCpp::Arguments &arguments);
+		friend OutStream& operator<<(OutStream &os, const Arguments &arguments);
 
 		template<typename T>
 		inline T operator[](Size i) const {

@@ -1,23 +1,20 @@
 //
-// Created by mard on 5/11/19.
+// Created by mard on 10/19/19.
 //
 
-#include <mardcpp/utils/util.hpp>
+#include <mardcpp/utility.hpp>
 
-#include <cstdarg>
-#include <iostream>
-
-namespace mardCpp {
+namespace mardCpp::utility {
 
 	const char * fmt(const char *__restrict format, ...) noexcept {
 		va_list args;
 		va_start(args, format);
-		vsnprintf(global::getSharedBuffer().data(), global::getSharedBuffer().size(), format, args);
+		vsnprintf(global::errorBuffer.data(), global::errorBuffer.size(), format, args);
 		va_end(args);
-		return global::getSharedBuffer().data();
+		return global::errorBuffer.data();
 	}
 
-	std::string sfmt(const char *__restrict format, ...) noexcept {
+	String sfmt(const char *__restrict format, ...) noexcept {
 		va_list args;
 		va_start(args, format);
 		std::string result;
@@ -29,5 +26,5 @@ namespace mardCpp {
 		va_end(args);
 		return result;
 	}
-}
 
+}

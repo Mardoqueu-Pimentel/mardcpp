@@ -2,9 +2,8 @@
 // Created by mard on 5/11/19.
 //
 
-#include <mardcpp/utils/time.hpp>
-
-#include <iostream>
+#include <mardcpp/time.hpp>
+#include <mardcpp/OutStream.hpp>
 
 namespace mardCpp::time {
 
@@ -14,7 +13,7 @@ namespace mardCpp::time {
 	}
 
 	Timer::Timer(Time &time)
-			:	time(time), start(steady_clock::now()) {}
+		:	time(time), start(steady_clock::now()) {}
 
 	void Time::set(const mardCpp::time::NanoDuration &duration) {
 		s = duration_cast<seconds>(duration).count();
@@ -34,7 +33,7 @@ namespace mardCpp::time {
 		raw = duration_cast<nanoseconds>(duration).count();
 	}
 
-	std::ostream &operator<<(std::ostream &os, const Time &time) {
+	OutStream &operator<<(OutStream &os, const Time &time) {
 		Time::TimeUnit m = time.s / 60;
 		Time::TimeUnit h = m / 60;
 		Time::TimeUnit d = h / 24;

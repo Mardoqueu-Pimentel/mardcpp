@@ -1,11 +1,13 @@
 //
-// Created by mard on 10/7/19.
+// Created by mard on 10/19/19.
 //
 
-#include <mardcpp/utils/hash.hpp>
-#include <mardcpp/utils/util.hpp>
+#include <mardcpp/hashing.hpp>
+#include <mardcpp/utility.hpp>
 
-namespace mardCpp {
+namespace mardCpp::hashing {
+
+	using mardCpp::utility::makeError;
 
 	Size nextPrimeOf(Size n) {
 		for (Size i = n; i <= 0xFFFFFFFFFFFFFFFF; ++i) {

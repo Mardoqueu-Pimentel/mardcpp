@@ -40,3 +40,5 @@ cmake-build-debug/
 build-development/
 
 build-production/
+
+cmake-build-release/

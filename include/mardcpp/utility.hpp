@@ -1,24 +1,25 @@
 //
-// Created by mard on 5/11/19.
+// Created by mard on 10/19/19.
 //
 
 #pragma once
 
-#include <cstdarg>
 #include <stdexcept>
 #include <sstream>
-#include <mardcpp/utils/def.hpp>
-#include <mardcpp/String.hpp>
+#include <mardcpp/def.hpp>
 #include <mardcpp/Array.hpp>
+#include <mardcpp/String.hpp>
 
-namespace mardCpp {
+
+namespace mardCpp::utility {
+
+	using string::String;
+	using array::Array;
 
 	namespace global {
-		template<Size size = 4_KB>
-		Array<char, size> &getSharedBuffer() {
-			static std::array<char, size> buffer;
-			return buffer;
-		}
+
+		static inline Array<Char, 4_KB> errorBuffer{};
+
 	}
 
 	template<typename T1, typename T2>
@@ -82,10 +83,9 @@ namespace mardCpp {
 	makeError(const char *__restrict format, ...) noexcept {
 		va_list args;
 		va_start(args, format);
-		vsnprintf(global::getSharedBuffer().data(), global::getSharedBuffer().size(), format, args);
+		vsnprintf(global::errorBuffer.data(), global::errorBuffer.size(), format, args);
 		va_end(args);
-
-		return Error(global::getSharedBuffer().data());
+		return Error(global::errorBuffer.data());
 	}
 
 }
