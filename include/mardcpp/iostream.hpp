@@ -16,4 +16,5 @@ namespace mardCpp {
 
 	static inline OutStream cout(std::cout);
 	static inline InStream cin(std::cin);
+	static inline OutStream clog(std::clog);
 }
