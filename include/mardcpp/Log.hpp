@@ -12,8 +12,8 @@
 
 #include <chrono>
 #include <csignal>
-#include <iostream>
 #include <mardcpp/def.hpp>
+#include <mardcpp/iostream.hpp>
 
 namespace mardCpp {
 
@@ -50,7 +50,7 @@ namespace mardCpp {
 		static inline auto sLevel = env == Env::PRODUCTION ? Level::kInfo : Level::kDebug;
 
 		template<Log::Level level, typename ... Ts>
-		static void write(std::ostream &os, const Ts &...ts) {
+		static void write(OutStream &stream, const Ts &...ts) {
 			if (Log::sLevel < level) {
 				return;
 			}
@@ -59,46 +59,47 @@ namespace mardCpp {
 				std::chrono::system_clock::now()
 			);
 
-			os << "[" << Log::toString(level) << "] " << std::ctime(&timeStamp);
-			((os << ts), ...);
-			os << '\n' << std::endl;
+			stream << "[" << Log::toString(level) << "] " << std::ctime(&timeStamp);
+			((stream << ts), ...);
+			stream << "\n\n";
+			stream.flush();
 		}
 
 	public:
 		template<typename ... Ts>
 		static void debug(const Ts &...ts) {
-			write<Log::Level::kDebug>(std::clog, ts...);
+			write<Log::Level::kDebug>(cout, ts...);
 		}
 
 		template<typename ... Ts>
 		static void info(const Ts &...ts) {
-			write<Log::Level::kInfo>(std::clog, ts...);
+			write<Log::Level::kInfo>(cout, ts...);
 		}
 
 		template<typename ... Ts>
 		static void warn(const Ts &...ts) {
-			write<Log::Level::kWarn>(std::clog, ts...);
+			write<Log::Level::kWarn>(clog, ts...);
 		}
 
 		template<typename ... Ts>
 		static void error(const Ts &...ts) {
-			write<Log::Level::kError>(std::clog, ts...);
+			write<Log::Level::kError>(clog, ts...);
 		}
 
 		template<typename ... Ts>
 		static void fatal(const Ts &...ts) {
-			write<Log::Level::kFatal>(std::clog, ts...);
+			write<Log::Level::kFatal>(clog, ts...);
 		}
 
 		template<typename ... Ts>
 		static void super(const Ts &...ts) {
-			write<Log::Level::kSuper>(std::clog, ts...);
+			write<Log::Level::kSuper>(clog, ts...);
 		}
 
 		template<typename ... Ts>
 		static void dev(const Ts &...ts) {
 			if constexpr (env == Env::DEVELOPMENT) {
-				write<Log::Level::kDebug>(std::clog, ts...);
+				write<Log::Level::kDebug>(cout, ts...);
 			}
 		}
 
