@@ -4,16 +4,14 @@
 
 #pragma once
 
+#include <cstdarg>
 #include <stdexcept>
 #include <sstream>
 #include <mardcpp/def.hpp>
 #include <mardcpp/Array.hpp>
-#include <mardcpp/String.hpp>
-
 
 namespace mardCpp::utility {
 
-	using string::String;
 	using array::Array;
 
 	namespace global {

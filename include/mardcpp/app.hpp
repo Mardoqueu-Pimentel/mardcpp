@@ -5,8 +5,6 @@
 #pragma once
 
 #include <mardcpp/Arguments.hpp>
-#include <mardcpp/Env.hpp>
-#include <mardcpp/iostream.hpp>
 #include <mardcpp/Log.hpp>
 
 namespace mardCpp::app {
@@ -15,14 +13,12 @@ namespace mardCpp::app {
 	int app(const Arguments &arguments);
 }
 
-int main(int argc, const char **argv) {
-	using mardCpp::cout;
+int main(int argc, const char *argv[]) {
 	using mardCpp::arguments::Arguments;
 	using mardCpp::Log;
-	using mardCpp::env;
 
 	Log::info("compiled with ", env, " environment");
 	const Arguments arguments(argc, argv);
-	cout << arguments << '\n';
+	Log::info(arguments);
 	return mardCpp::app::app(arguments);
 }

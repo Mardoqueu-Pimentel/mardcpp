@@ -4,9 +4,7 @@
 
 #pragma once
 
-#include <iosfwd>
 #include <mardcpp/def.hpp>
-#include <mardcpp/String.hpp>
 #include <mardcpp/Vector.hpp>
 #include <mardcpp/UnorderedSet.hpp>
 #include <mardcpp/Pair.hpp>
@@ -17,7 +15,6 @@ namespace mardCpp::arguments {
 
 	using outStream::OutStream;
 	using pair::Pair;
-	using string::String;
 	using unorderedMap::UnorderedMap;
 	using unorderedSet::UnorderedSet;
 	using utility::fmt;

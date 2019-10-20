@@ -6,6 +6,7 @@
 
 #include <cmath>
 #include <cstdint>
+#include <string>
 #include <string_view>
 
 using i08 = int8_t;
@@ -63,6 +64,7 @@ inline constexpr Size operator "" _GB (ulli x) {
 
 using std::string_view_literals::operator ""sv;
 
+using String = std::string;
 using StringView = std::string_view;
 
 struct Hash {
@@ -92,3 +94,50 @@ struct Less {
 		return lhe < rhe;
 	}
 };
+
+struct Zero {};
+
+class Env {
+public:
+	enum {DEVELOPMENT, STAGE, PRODUCTION};
+	constexpr static inline auto STR_DEVELOPMENT = "development"sv;
+	constexpr static inline auto STR_STAGE = "stage"sv;
+	constexpr static inline auto STR_PRODUCTION = "production"sv;
+
+	using Value = decltype(Env::DEVELOPMENT);
+private:
+	Value mEnv;
+
+public:
+	constexpr Env(const Value& value = Env::DEVELOPMENT)
+		: mEnv(value) {}
+
+	constexpr Size operator==(const Env::Value &env) const noexcept {
+		return mEnv == env;
+	}
+
+	constexpr operator StringView () const noexcept {
+		switch (mEnv) {
+			case DEVELOPMENT:
+				return Env::STR_DEVELOPMENT;
+			case STAGE:
+				return Env::STR_STAGE;
+			case PRODUCTION:
+				return Env::STR_PRODUCTION;
+		}
+		return STR_DEVELOPMENT;
+	}
+
+	template<typename tFunctor>
+	constexpr void executeIn(const Value &value, const tFunctor &functor) const {
+		if (mEnv == value) {
+			functor();
+		}
+	}
+
+};
+
+#ifndef ENVIRONMENT
+#define ENVIRONMENT Env::DEVELOPMENT
+#endif
+static inline constexpr Env env{ENVIRONMENT};

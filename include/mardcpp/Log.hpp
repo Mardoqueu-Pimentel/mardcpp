@@ -4,18 +4,16 @@
 
 #pragma once
 
-//
-// Created by mard on 10/11/19.
-//
-
-#pragma once
-
 #include <chrono>
 #include <csignal>
+#include <iostream>
 #include <mardcpp/def.hpp>
-#include <mardcpp/iostream.hpp>
+#include <mardcpp/OutStream.hpp>
 
 namespace mardCpp {
+	using outStream::OutStream;
+
+	static inline OutStream cerr(std::cerr), clog(std::clog), cout(std::cout);
 
 	class Log {
 
@@ -78,29 +76,22 @@ namespace mardCpp {
 
 		template<typename ... Ts>
 		static void warn(const Ts &...ts) {
-			write<Log::Level::kWarn>(clog, ts...);
+			write<Log::Level::kWarn>(cerr, ts...);
 		}
 
 		template<typename ... Ts>
 		static void error(const Ts &...ts) {
-			write<Log::Level::kError>(clog, ts...);
+			write<Log::Level::kError>(cerr, ts...);
 		}
 
 		template<typename ... Ts>
 		static void fatal(const Ts &...ts) {
-			write<Log::Level::kFatal>(clog, ts...);
+			write<Log::Level::kFatal>(cerr, ts...);
 		}
 
 		template<typename ... Ts>
 		static void super(const Ts &...ts) {
-			write<Log::Level::kSuper>(clog, ts...);
-		}
-
-		template<typename ... Ts>
-		static void dev(const Ts &...ts) {
-			if constexpr (env == Env::DEVELOPMENT) {
-				write<Log::Level::kDebug>(cout, ts...);
-			}
+			write<Log::Level::kSuper>(cerr, ts...);
 		}
 
 		static inline bool initialized = ([](){

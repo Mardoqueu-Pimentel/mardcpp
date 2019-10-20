@@ -4,19 +4,22 @@
 
 #pragma once
 
+#include <memory>
 #include <ostream>
+#include <tuple>
 #include <mardcpp/def.hpp>
 #include <mardcpp/iosfwd.hpp>
 #include <mardcpp/Pair.hpp>
-#include <mardcpp/String.hpp>
 
 namespace mardCpp::outStream {
-
-	using OStream = std::ostream;
 	using pair::Pair;
-	using string::String;
 
 	class OutStream {
+
+		const static inline bool initialized = ([]() noexcept {
+			OStream::sync_with_stdio(false);
+			return true;
+		})();
 
 		OutStream &mSelf = *this;
 		OStream &mStream;
@@ -27,9 +30,27 @@ namespace mardCpp::outStream {
 			return mSelf;
 		}
 
+		template<typename ... tTypes, Size ... tIndexes>
+		inline OutStream &tupleToStream(
+			const std::tuple<tTypes...> &tuple,
+			std::index_sequence<tIndexes...>
+		) {
+			mStream << "(";
+			((mSelf << std::get<tIndexes>(tuple), mStream << ", "), ...);
+			mStream << std::get<sizeof ... (tIndexes)>(tuple);
+			mStream << ')';
+			return mSelf;
+		}
+
 	public:
 		OutStream(OStream &stream) noexcept
-			: mStream(stream) {}
+		: mStream(stream) {
+			mStream.tie(nullptr);
+		}
+
+		inline void flush() {
+			mStream.flush();
+		}
 
 		template<typename tType, typename std::enable_if<std::is_fundamental<tType>::value, bool>::type _ = true>
 		inline OutStream &operator<<(const tType &value) {
@@ -49,14 +70,39 @@ namespace mardCpp::outStream {
 		template<typename tType, typename std::enable_if<std::is_pointer<tType>::value, bool>::type _ = true>
 		inline OutStream &operator<<(const tType &ptr) {
 			mSelf.sendToStream(static_cast<const void *>(ptr));
-			mSelf << ':' << *ptr;
+			mSelf << '#' << *ptr;
 			return mSelf;
 		}
 
-		template<template<typename> class tPtr, typename tType, typename std::enable_if<std::is_same<tType, typename std::pointer_traits<tPtr<tType>>::element_type>::value, bool>::type _ = true>
-		inline OutStream &operator<<(const tPtr<tType> &ptr) {
-			mSelf.sendToStream(static_cast<const void *>(&*ptr));
-			mSelf << ':' << *ptr;
+		inline OutStream &operator<<(char *cString) {
+			mSelf.sendToStream(cString);
+			return mSelf;
+		}
+
+		template<typename ... tTypes>
+		inline OutStream &operator<<(const std::tuple<tTypes...> &tuple) {
+			return mSelf.tupleToStream<tTypes...>(tuple, std::make_index_sequence<sizeof...(tTypes) - 1>());
+		}
+
+		template<typename tType>
+		inline OutStream &operator<<(const std::unique_ptr<tType> &ptr) {
+			mSelf << *ptr;
+			return mSelf;
+		}
+
+		template<typename tType>
+		inline OutStream &operator<<(const std::shared_ptr<tType> &ptr) {
+			mSelf << *ptr;
+			return mSelf;
+		}
+
+		template<typename tType>
+		inline OutStream &operator<<(const std::weak_ptr<tType> &ptr) {
+			if (auto p = ptr.lock()) {
+				mSelf << *p;
+			} else {
+				mSelf << "nullPtr";
+			}
 			return mSelf;
 		}
 
