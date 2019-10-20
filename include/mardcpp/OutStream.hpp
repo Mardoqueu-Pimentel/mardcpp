@@ -46,6 +46,20 @@ namespace mardCpp::outStream {
 			return mSelf;
 		}
 
+		template<typename tType, typename std::enable_if<std::is_pointer<tType>::value, bool>::type _ = true>
+		inline OutStream &operator<<(const tType &ptr) {
+			mSelf.sendToStream(static_cast<const void *>(ptr));
+			mSelf << ':' << *ptr;
+			return mSelf;
+		}
+
+		template<template<typename> class tPtr, typename tType, typename std::enable_if<std::is_same<tType, typename std::pointer_traits<tPtr<tType>>::element_type>::value, bool>::type _ = true>
+		inline OutStream &operator<<(const tPtr<tType> &ptr) {
+			mSelf.sendToStream(static_cast<const void *>(&*ptr));
+			mSelf << ':' << *ptr;
+			return mSelf;
+		}
+
 		template <typename tIterator>
 		inline void range(tIterator it, tIterator end, Char separator = ' ') {
 			if (it != end) {
@@ -57,6 +71,17 @@ namespace mardCpp::outStream {
 				}
 				mSelf << *it;
 			}
+		}
+
+		inline OutStream &operator<<(const char *cStr) {
+			mSelf.sendToStream(cStr);
+			return mSelf;
+		}
+
+		template<typename tType, Size tSize>
+		inline OutStream &operator<<(const tType (&value)[tSize]) {
+			mSelf.range(value, value + tSize);
+			return mSelf;
 		}
 
 		template<

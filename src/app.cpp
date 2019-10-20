@@ -6,6 +6,5 @@
 
 int mardCpp::app::app(const Arguments &arguments) {
 
-
 	return 0;
 }
