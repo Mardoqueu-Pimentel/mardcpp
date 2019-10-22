@@ -5,10 +5,10 @@
 #pragma once
 
 #include <mardcpp/def.hpp>
-#include <mardcpp/Vector.hpp>
-#include <mardcpp/UnorderedSet.hpp>
-#include <mardcpp/Pair.hpp>
-#include <mardcpp/UnorderedMap.hpp>
+#include <mardcpp/vector.hpp>
+#include <mardcpp/unorderedSet.hpp>
+#include <mardcpp/pair.hpp>
+#include <mardcpp/unorderedMap.hpp>
 #include <mardcpp/utility.hpp>
 
 namespace mardCpp::arguments {

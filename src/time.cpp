@@ -3,7 +3,7 @@
 //
 
 #include <mardcpp/time.hpp>
-#include <mardcpp/OutStream.hpp>
+#include <mardcpp/outStream.hpp>
 
 namespace mardCpp::time {
 

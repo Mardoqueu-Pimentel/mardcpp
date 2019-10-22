@@ -4,7 +4,7 @@
 
 #include <mardcpp/app.hpp>
 
-int mardCpp::app::app(const Arguments &arguments) {
+int mardCpp::app::app(const Arguments &) {
 
 	return 0;
 }

@@ -18,4 +18,9 @@ namespace mardCpp::memory {
 	template<typename tType>
 	using WeakPtr = std::weak_ptr<tType>;
 
+	template<typename tType>
+	constexpr static inline auto makeShared = std::make_shared<tType>;
+
+	template<typename tType>
+	constexpr static inline auto makeUnique = std::make_unique<tType>;
 }

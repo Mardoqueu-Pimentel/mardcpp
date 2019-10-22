@@ -8,7 +8,7 @@
 #include <csignal>
 #include <iostream>
 #include <mardcpp/def.hpp>
-#include <mardcpp/OutStream.hpp>
+#include <mardcpp/outStream.hpp>
 
 namespace mardCpp {
 	using outStream::OutStream;
@@ -66,32 +66,32 @@ namespace mardCpp {
 	public:
 		template<typename ... Ts>
 		static void debug(const Ts &...ts) {
-			write<Log::Level::kDebug>(cout, ts...);
+			write < Log::Level::kDebug >(cout, ts...);
 		}
 
 		template<typename ... Ts>
 		static void info(const Ts &...ts) {
-			write<Log::Level::kInfo>(cout, ts...);
+			write < Log::Level::kInfo >(cout, ts...);
 		}
 
 		template<typename ... Ts>
 		static void warn(const Ts &...ts) {
-			write<Log::Level::kWarn>(cerr, ts...);
+			write < Log::Level::kWarn >(cerr, ts...);
 		}
 
 		template<typename ... Ts>
 		static void error(const Ts &...ts) {
-			write<Log::Level::kError>(cerr, ts...);
+			write < Log::Level::kError >(cerr, ts...);
 		}
 
 		template<typename ... Ts>
 		static void fatal(const Ts &...ts) {
-			write<Log::Level::kFatal>(cerr, ts...);
+			write < Log::Level::kFatal >(cerr, ts...);
 		}
 
 		template<typename ... Ts>
 		static void super(const Ts &...ts) {
-			write<Log::Level::kSuper>(cerr, ts...);
+			write < Log::Level::kSuper >(cerr, ts...);
 		}
 
 		static inline bool initialized = ([](){

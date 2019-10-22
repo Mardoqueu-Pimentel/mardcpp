@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <mardcpp/Arguments.hpp>
-#include <mardcpp/Log.hpp>
+#include <mardcpp/arguments.hpp>
+#include <mardcpp/log.hpp>
 
 namespace mardCpp::app {
 	using mardCpp::arguments::Arguments;

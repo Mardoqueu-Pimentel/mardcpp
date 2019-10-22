@@ -8,7 +8,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <mardcpp/def.hpp>
-#include <mardcpp/Array.hpp>
+#include <mardcpp/array.hpp>
 
 namespace mardCpp::utility {
 

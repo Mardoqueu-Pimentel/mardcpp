@@ -9,7 +9,7 @@
 #include <tuple>
 #include <mardcpp/def.hpp>
 #include <mardcpp/iosfwd.hpp>
-#include <mardcpp/Pair.hpp>
+#include <mardcpp/pair.hpp>
 
 namespace mardCpp::outStream {
 	using pair::Pair;

@@ -3,8 +3,8 @@
 //
 
 #include <regex>
-#include <mardcpp/Arguments.hpp>
-#include <mardcpp/OutStream.hpp>
+#include <mardcpp/arguments.hpp>
+#include <mardcpp/outStream.hpp>
 
 namespace mardCpp::arguments {
 
