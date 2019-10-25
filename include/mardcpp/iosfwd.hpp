@@ -11,7 +11,6 @@ namespace mardCpp::outStream {
 	using OStream = std::ostream;
 
 	class OutStream;
-
 }
 
 namespace mardCpp::inStream {

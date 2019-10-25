@@ -10,12 +10,12 @@
 #include <mardcpp/def.hpp>
 #include <mardcpp/iosfwd.hpp>
 #include <mardcpp/pair.hpp>
+#include <mardcpp/typeTraits.hpp>
 
 namespace mardCpp::outStream {
 	using pair::Pair;
 
 	class OutStream {
-
 		const static inline bool initialized = ([]() noexcept {
 			OStream::sync_with_stdio(false);
 			return true;
@@ -52,7 +52,7 @@ namespace mardCpp::outStream {
 			mStream.flush();
 		}
 
-		template<typename tType, typename std::enable_if<std::is_fundamental<tType>::value, bool>::type _ = true>
+		template<typename tType, typename std::enable_if<std::is_fundamental<tType>::value or IsStreamable<tType>::value, bool>::type _ = true>
 		inline OutStream &operator<<(const tType &value) {
 			return mSelf.sendToStream(value);
 		}
