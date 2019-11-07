@@ -35,12 +35,12 @@ namespace mardCpp {
 
 		constexpr static StringView toString(const Level level) {
 			switch (level) {
-				case Level::kSuper: return "super"sv;
-				case Level::kFatal:	return "fatal"sv;
-				case Level::kError:	return "error"sv;
-				case Level::kWarn:	return "warn"sv;
-				case Level::kInfo:	return "info"sv;
-				default:						return "debug"sv;
+				case Level::kSuper: return "super";
+				case Level::kFatal:	return "fatal";
+				case Level::kError:	return "error";
+				case Level::kWarn:	return "warn";
+				case Level::kInfo:	return "info";
+				default:						return "debug";
 			}
 		}
 
